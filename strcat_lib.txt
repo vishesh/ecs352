@@ -1,0 +1,7 @@
+Enter s1: Hello World!
+Enter s2: How are you?
+         s1=Hello World!
+         s2=How are you?
+Concatanating s1 and s2 to s1. Now,
+         s1=Hello World! How are you?
+         s2=How are you?

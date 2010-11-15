@@ -1,0 +1,23 @@
+
+
+Array Input:
+Enter array[0]: 12
+Enter array[1]: 98
+Enter array[2]: 45
+Enter array[3]: 76
+Enter array[4]: 32
+Enter array[5]: 65
+Enter array[6]: 45
+Enter array[7]: 67
+Enter array[8]: 98
+Enter array[9]: 31
+
+You Entered:
+--------
+12 - 98 - 45 - 76 - 32 - 65 - 45 - 67 - 98 - 31 -
+--------
+After Sorting:
+--------
+12 - 31 - 32 - 45 - 45 - 65 - 67 - 76 - 98 - 98 -
+--------
+Press any key to continue . . .

@@ -1,0 +1,87 @@
+
+
+QUEUE IMPLEMENTATION USING ARRATY
+  1. Enqueue
+  2. Dequeue
+  x. Exit
+
+
+What to do?
+1
+
+Enter Data: 2
+
+Queue is now
+    2
+  1. Enqueue
+  2. Dequeue
+  x. Exit
+
+
+What to do?
+1
+
+Enter Data: 5
+
+Queue is now
+    2    5
+  1. Enqueue
+  2. Dequeue
+  x. Exit
+
+
+What to do?
+1
+
+Enter Data: 6
+
+Queue is now
+    2    5    6
+  1. Enqueue
+  2. Dequeue
+  x. Exit
+
+
+What to do?
+1
+
+Enter Data: 9
+
+Queue is now
+    2    5    6    9
+  1. Enqueue
+  2. Dequeue
+  x. Exit
+
+
+What to do?
+2
+
+Dequeued  ->  2
+Queue is now
+    5    6    9
+  1. Enqueue
+  2. Dequeue
+  x. Exit
+
+
+What to do?
+2
+
+Dequeued  ->  5
+Queue is now
+    6    9
+  1. Enqueue
+  2. Dequeue
+  x. Exit
+
+
+What to do?
+2
+
+Dequeued  ->  6
+Queue is now
+    9
+  1. Enqueue
+  2. Dequeue
+  x. Exit

@@ -1,0 +1,8 @@
+Enter s1: hello
+Enter s2: helwo
+         s1=hello
+         s2=helwo
+strcmp over s1 and s2=-11
+
+
+

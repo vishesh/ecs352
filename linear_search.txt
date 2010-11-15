@@ -1,0 +1,22 @@
+
+
+Array Input:
+Enter array[0]: 56
+Enter array[1]: 23
+Enter array[2]: 11
+Enter array[3]: 98
+Enter array[4]: 67
+Enter array[5]: 45
+Enter array[6]: 32
+Enter array[7]: 21
+Enter array[8]: 45
+Enter array[9]: 90
+
+You Entered:
+--------
+56 - 23 - 11 - 98 - 67 - 45 - 32 - 21 - 45 - 90 -
+--------
+What to search: 67
+
+Element found at: 4Press any key to continue . . .
+

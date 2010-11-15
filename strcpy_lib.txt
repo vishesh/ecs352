@@ -1,0 +1,9 @@
+Enter s1: vishesh
+         s1=vishesh
+
+copy s1 to s2.
+        s2 = vishesh
+
+
+
+

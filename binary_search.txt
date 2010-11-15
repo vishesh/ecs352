@@ -1,0 +1,21 @@
+
+
+Array Input:
+Enter array[0]: 1
+Enter array[1]: 6
+Enter array[2]: 8
+Enter array[3]: 9
+Enter array[4]: 12
+Enter array[5]: 18
+Enter array[6]: 21
+Enter array[7]: 32
+Enter array[8]: 45
+Enter array[9]: 54
+
+You Entered:
+--------
+1 - 6 - 8 - 9 - 12 - 18 - 21 - 32 - 45 - 54 -
+--------
+What to search: 21
+
+Element found at: 6

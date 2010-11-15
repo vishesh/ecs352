@@ -1,0 +1,284 @@
+Linked List
+--------------------------------
+
+
+What would you like to do?
+
+  1. Insert at First Position
+  2. Insert at Last Position
+  3. Insert at nth Position
+  4. Delete First Element
+  5. Delete Last Element
+  6. Delete from nth Position
+  7. Print the List
+  x. Exit
+
+Enter Choice: 1
+-----
+
+Enter data: 8
+
+----
+8    65    2
+----
+
+
+Linked List
+--------------------------------
+
+
+What would you like to do?
+
+  1. Insert at First Position
+  2. Insert at Last Position
+  3. Insert at nth Position
+  4. Delete First Element
+  5. Delete Last Element
+  6. Delete from nth Position
+  7. Print the List
+  x. Exit
+
+Enter Choice: 1
+-----
+
+Enter data: 8
+
+----
+8    8    65    2
+----
+
+
+Linked List
+--------------------------------
+
+
+What would you like to do?
+
+  1. Insert at First Position
+  2. Insert at Last Position
+  3. Insert at nth Position
+  4. Delete First Element
+  5. Delete Last Element
+  6. Delete from nth Position
+  7. Print the List
+  x. Exit
+
+Enter Choice: 2
+-----
+
+Enter data: 4
+
+----
+8    8    65    2    4
+----
+
+
+Linked List
+--------------------------------
+
+
+What would you like to do?
+
+  1. Insert at First Position
+  2. Insert at Last Position
+  3. Insert at nth Position
+  4. Delete First Element
+  5. Delete Last Element
+  6. Delete from nth Position
+  7. Print the List
+  x. Exit
+
+Enter Choice: 2
+-----
+
+Enter data: 6
+
+----
+8    8    65    2    4    6
+----
+
+
+Linked List
+--------------------------------
+
+
+What would you like to do?
+
+  1. Insert at First Position
+  2. Insert at Last Position
+  3. Insert at nth Position
+  4. Delete First Element
+  5. Delete Last Element
+  6. Delete from nth Position
+  7. Print the List
+  x. Exit
+
+Enter Choice: 1
+-----
+
+Enter data: 3
+
+----
+3    8    8    65    2    4    6
+----
+
+
+Linked List
+--------------------------------
+
+
+What would you like to do?
+
+  1. Insert at First Position
+  2. Insert at Last Position
+  3. Insert at nth Position
+  4. Delete First Element
+  5. Delete Last Element
+  6. Delete from nth Position
+  7. Print the List
+  x. Exit
+
+Enter Choice: 3
+-----
+
+Enter data: 12
+Enter position: 2
+
+----
+3    8    12    8    65    2    4    6
+----
+
+
+Linked List
+--------------------------------
+
+
+What would you like to do?
+
+  1. Insert at First Position
+  2. Insert at Last Position
+  3. Insert at nth Position
+  4. Delete First Element
+  5. Delete Last Element
+  6. Delete from nth Position
+  7. Print the List
+  x. Exit
+
+Enter Choice: 4
+-----
+
+----
+8    12    8    65    2    4    6
+----
+
+
+Linked List
+--------------------------------
+
+
+What would you like to do?
+
+  1. Insert at First Position
+  2. Insert at Last Position
+  3. Insert at nth Position
+  4. Delete First Element
+  5. Delete Last Element
+  6. Delete from nth Position
+  7. Print the List
+  x. Exit
+
+Enter Choice: 5
+-----
+
+----
+8    12    8    65    2    4
+----
+
+
+Linked List
+--------------------------------
+
+
+What would you like to do?
+
+  1. Insert at First Position
+  2. Insert at Last Position
+  3. Insert at nth Position
+  4. Delete First Element
+  5. Delete Last Element
+  6. Delete from nth Position
+  7. Print the List
+  x. Exit
+
+Enter Choice: 5
+-----
+
+----
+8    12    8    65    2
+----
+
+
+Linked List
+--------------------------------
+
+
+What would you like to do?
+
+  1. Insert at First Position
+  2. Insert at Last Position
+  3. Insert at nth Position
+  4. Delete First Element
+  5. Delete Last Element
+  6. Delete from nth Position
+  7. Print the List
+  x. Exit
+
+Enter Choice: 6
+-----
+Enter position: 2
+
+----
+8    12    65    2
+----
+
+
+Linked List
+--------------------------------
+
+
+What would you like to do?
+
+  1. Insert at First Position
+  2. Insert at Last Position
+  3. Insert at nth Position
+  4. Delete First Element
+  5. Delete Last Element
+  6. Delete from nth Position
+  7. Print the List
+  x. Exit
+
+Enter Choice: 7
+-----
+
+----
+8    12    65    2
+----
+
+
+Linked List
+--------------------------------
+
+
+What would you like to do?
+
+  1. Insert at First Position
+  2. Insert at Last Position
+  3. Insert at nth Position
+  4. Delete First Element
+  5. Delete Last Element
+  6. Delete from nth Position
+  7. Print the List
+  x. Exit
+
+Enter Choice: x
+-----

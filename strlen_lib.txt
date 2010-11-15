@@ -1,0 +1,12 @@
+Enter s1: vishesh
+length of s1 = 7
+
+
+
+
+
+
+
+
+
+

@@ -1,0 +1,4043 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+<head>
+<style type="text/css">
+body{font-size: 90%;}
+div.prog { page-break-after: always; }
+</style>
+<title>Data Structures Lab</title>
+
+</head>
+
+<body>
+<div class='prog'><pre>
+/**
+<h2> * Queue using Arrays[Dynamically Allocated]
+</h2> * Vishesh Yadav
+ *
+ */
+
+#include&lt;stdio.h&gt;
+#include&lt;stdlib.h&gt;
+
+
+struct Queue {
+    int *data;
+    int  front;
+    int  rear;
+    int  length;
+};
+
+struct Queue* CreateQueue(int length) {
+    struct Queue *nw = malloc( sizeof(struct Queue) );
+    nw-&gt;data = malloc( sizeof(int) * length );
+    nw-&gt;rear = -1;
+    nw-&gt;front = -1;
+    nw-&gt;length = length;
+    return nw;
+}
+
+void FreeQueue(struct Queue *q)
+{
+    free(q-&gt;data);
+    free(q);
+}
+
+int QueueEmpty(struct Queue *q)
+{
+    if ( q-&gt;front == q-&gt;rear )
+        return 1;
+    else
+        return 0;
+}
+
+int QueueFull(struct Queue *q)
+{
+    if ( q-&gt;rear == q-&gt;length - 1 )
+        return 1;
+    else
+        return 0;
+}
+
+int Enqueue(struct Queue *q, int data)
+{
+    if ( !QueueFull(q) ) {
+        q-&gt;data[++q-&gt;rear] = data;
+        return 1;
+    }
+    return 0;
+}
+
+int Dequeue(struct Queue *q)
+{
+    if ( !QueueEmpty(q) )
+        return q-&gt;data[++q-&gt;front];
+    return -1;
+}
+
+void PrintQueue(struct Queue *q)
+{
+    int i;
+    for (i=q-&gt;front+1; i&lt;=q-&gt;rear; i++)
+        printf("%5d", q-&gt;data[i]);
+    printf("\n");
+}
+
+int main()
+{
+    struct Queue *q = CreateQueue(10);
+    char opt = ' ';
+
+    printf("\n\nQUEUE IMPLEMENTATION USING ARRATY\n");
+
+    while ( opt != 'x' ) {
+        printf("  1. Enqueue\n");
+        printf("  2. Dequeue\n");
+        printf("  x. Exit\n\n");
+
+        printf("\nWhat to do?\n");
+        fflush(stdin);
+        scanf("%c", &amp;opt);
+
+        if ( opt == '1' ) {
+            int x;
+            printf("\nEnter Data: ");
+            scanf("%d", &amp;x);
+            Enqueue(q, x);
+        } else if ( opt == '2' ) {
+            printf("\nDequeued  -&gt;  %d", Dequeue(q) );
+        } else if ( opt == 'x' ) {
+            break;
+        }
+        printf("\nQueue is now\n");
+        PrintQueue(q);
+    }
+    FreeQueue(q);
+    return 0;
+}
+
+</pre><h5>Output</h5><pre>
+
+QUEUE IMPLEMENTATION USING ARRATY
+  1. Enqueue
+  2. Dequeue
+  x. Exit
+
+
+What to do?
+1
+
+Enter Data: 2
+
+Queue is now
+    2
+  1. Enqueue
+  2. Dequeue
+  x. Exit
+
+
+What to do?
+1
+
+Enter Data: 5
+
+Queue is now
+    2    5
+  1. Enqueue
+  2. Dequeue
+  x. Exit
+
+
+What to do?
+1
+
+Enter Data: 6
+
+Queue is now
+    2    5    6
+  1. Enqueue
+  2. Dequeue
+  x. Exit
+
+
+What to do?
+1
+
+Enter Data: 9
+
+Queue is now
+    2    5    6    9
+  1. Enqueue
+  2. Dequeue
+  x. Exit
+
+
+What to do?
+2
+
+Dequeued  -&gt;  2
+Queue is now
+    5    6    9
+  1. Enqueue
+  2. Dequeue
+  x. Exit
+
+
+What to do?
+2
+
+Dequeued  -&gt;  5
+Queue is now
+    6    9
+  1. Enqueue
+  2. Dequeue
+  x. Exit
+
+
+What to do?
+2
+
+Dequeued  -&gt;  6
+Queue is now
+    9
+  1. Enqueue
+  2. Dequeue
+  x. Exit
+</pre></div><div class='prog'><pre>
+/**
+<h2>  * Array Insertion and Deletion
+</h2>  * Vishesh yadav
+  *
+  */
+
+
+#include &lt;stdio.h&gt;
+
+void array_print(int *a, int size)
+{
+    while (size--)
+        printf("%i ",*a++);
+}
+
+int array_insert(int *a, int size, int element, int position)
+{
+    int *p;
+    if (position &gt;=size) {
+        fprintf(stderr,"\narray_insert: The specified position %i is not less than the"
+                " size of the array which is %i\n",position,size);
+        return 0;
+    }
+    p=a+position;
+    a+=size;
+    while (a&gt;p)    *(a)=*(a-1),a--;
+    *a=element;
+    return 1;
+}
+
+int array_delete(int *a, int size, int position)
+{
+    int *last;
+    if (position &gt;=size) {
+        fprintf(stderr,"\narray_delete: The specified position %i is not less than the"
+                " size of the array which is %i\n",position,size);
+        return 0;
+    }
+    last=a+size-1;// points to the last element
+    a+=position;//a now points to the position of the deltetion
+    while (a&lt;last) *(a)=*(a+1),a++;
+    return 1;
+}
+
+void array_reverse(int *a, int size)
+{
+    int i,t;
+    for (i=0; i &lt; size/2 ; i++) {
+        t=a[i];
+        a[i]=a[size-i-1];
+        a[size-i-1]=t;
+    }
+}
+
+void input_array(int *a, int size)
+{
+    while (size--)
+        scanf("%i",a++);
+}
+
+#define MAX 20
+
+int main()
+{
+    int a[MAX];
+    int s;
+    char i;
+    int e;
+    int p;
+
+    printf("With How many numbers do you wanto start with?");
+    scanf("%i", &amp;s);
+    printf("Enter the array:");
+    input_array(a,s);
+
+    do {
+        printf("\nWhat do you want to do?"
+               "\n 1. Insert an element.\n 2. Delete an element \n 3. Reverse"
+               "\n 4. Display \n 5. Exit\n");
+        fflush(stdin);
+        scanf("%c", &amp;i);
+        switch (i) {
+        case '1': {
+            printf("Enter the Position (zero-based) and the element to be inserted:");
+            scanf("%i%i",&amp;p,&amp;e);
+            array_insert(a,s,e,p);
+            s++;
+            printf("Done!\n");
+            break;
+        }
+        case '2': {
+            printf("Enter the position at which you want to delete the element:");
+            scanf("%i",&amp;p);
+            array_delete(a,s,p);
+            s--;
+            printf("Done!\n");
+            break;
+        }
+        case '3': {
+            array_reverse(a,s);
+            printf("Done!\n");
+            break;
+        }
+        case '4': {
+            printf("\n");
+            array_print(a,s);
+            printf("\n\n");
+            break;
+        }
+        }
+    } while (i!='5');
+    return 0;
+}
+</pre><h5>Output</h5><pre>With How many numbers do you wanto start with?3
+Enter the array:2 4 6
+
+What do you want to do?
+ 1. Insert an element.
+ 2. Delete an element
+ 3. Reverse
+ 4. Display
+ 5. Exit
+4
+
+2 4 6
+
+
+What do you want to do?
+ 1. Insert an element.
+ 2. Delete an element
+ 3. Reverse
+ 4. Display
+ 5. Exit
+1
+Enter the Position (zero-based) and the element to be inserted:2
+6
+Done!
+
+What do you want to do?
+ 1. Insert an element.
+ 2. Delete an element
+ 3. Reverse
+ 4. Display
+ 5. Exit
+4
+
+2 4 6 6
+
+
+What do you want to do?
+ 1. Insert an element.
+ 2. Delete an element
+ 3. Reverse
+ 4. Display
+ 5. Exit
+1
+Enter the Position (zero-based) and the element to be inserted:3
+7
+Done!
+
+What do you want to do?
+ 1. Insert an element.
+ 2. Delete an element
+ 3. Reverse
+ 4. Display
+ 5. Exit
+4
+
+2 4 6 7 6
+
+
+What do you want to do?
+ 1. Insert an element.
+ 2. Delete an element
+ 3. Reverse
+ 4. Display
+ 5. Exit
+2
+Enter the position at which you want to delete the element:2
+Done!
+
+What do you want to do?
+ 1. Insert an element.
+ 2. Delete an element
+ 3. Reverse
+ 4. Display
+ 5. Exit
+4
+
+2 4 7 6
+
+
+What do you want to do?
+ 1. Insert an element.
+ 2. Delete an element
+ 3. Reverse
+ 4. Display
+ 5. Exit
+5</pre></div><div class='prog'><pre>/**
+<h2>  * String Operation: strcmp[user defined]
+</h2>  * Vishesh yadav
+  *
+  */
+
+#include&lt;stdio.h&gt;
+
+int strcmp(char *s, char *t)
+{
+    for ( ; *s == *t; s++, t++)
+        if (*s == '\0')
+            return 0;
+    return *s - *t;
+}
+
+#define MAX 50
+
+int main(void)
+{
+    char s1[MAX], s2[50];
+
+    printf("Enter s1: ");
+    gets(s1);
+    printf("Enter s2: ");
+    gets(s2);
+
+    printf("\t s1=%s \n\t s2=%s \n",s1,s2);
+
+    printf("strcmp over s1 and s2=%i",strcmp(s1,s2));
+
+    return 0;
+}
+
+</pre><h5>Output</h5><pre>Enter s1: hello
+Enter s2: helwo
+         s1=hello
+         s2=helwo
+strcmp over s1 and s2=-11
+
+
+
+</pre></div><div class='prog'><pre>/**
+<h2>  * String Operation: strcat[user defined]
+</h2>  * Vishesh yadav
+  *
+  */
+
+#include&lt;stdio.h&gt;
+
+char* strcat(char* dest, char* src)
+{
+    while (*dest++);
+    dest--;
+    while (*dest++ = *src++);
+    return dest;
+}
+
+#define MAX 50
+
+int main(void)
+{
+    char s1[MAX], s2[50];
+
+    printf("Enter s1: ");
+    gets(s1);
+    printf("Enter s2: ");
+    gets(s2);
+    printf("\t s1=%s \n\t s2=%s \n",s1,s2);
+
+    printf("Concatanating s1 and s2 to s1. Now,\n");
+    strcat(s1,s2);
+    printf("\t s1=%s \n\t s2=%s \n",s1,s2);
+
+    return 0;
+}
+
+</pre><h5>Output</h5><pre>Enter s1: Hello World!
+Enter s2: How are you?
+         s1=Hello World!
+         s2=How are you?
+Concatanating s1 and s2 to s1. Now,
+         s1=Hello World! How are you?
+         s2=How are you?</pre></div><div class='prog'><pre>/**
+<h2>  * String Operation: strlen[user defined]
+</h2>  * Vishesh yadav
+  *
+  */
+
+#include&lt;stdio.h&gt;
+#include&lt;string.h&gt;
+
+#define MAX 50
+
+int main(void)
+{
+    char s1[MAX];
+
+    printf("Enter s1: ");
+    gets(s1);
+
+    printf("length of s1 = %d", strlen(s1));
+
+    return 0;
+}
+
+</pre><h5>Output</h5><pre>Enter s1: vishesh
+length of s1 = 7
+
+
+
+
+
+
+
+
+
+
+</pre></div><div class='prog'><pre>/**
+<h2>  * String Operation: strcat
+</h2>  * Vishesh yadav
+  *
+  */
+
+#include&lt;stdio.h&gt;
+#include&lt;string.h&gt;
+
+#define MAX 50
+
+int main(void)
+{
+    char s1[MAX], s2[50];
+
+    printf("Enter s1: ");
+    gets(s1);
+    printf("Enter s2: ");
+    gets(s2);
+    printf("\t s1=%s \n\t s2=%s \n",s1,s2);
+
+    printf("Concatanating s1 and s2 to s1. Now,\n");
+    strcat(s1,s2);
+    printf("\t s1=%s \n\t s2=%s \n",s1,s2);
+
+    return 0;
+}
+
+</pre><h5>Output</h5><pre>Enter s1: Hello World!
+Enter s2: How are you?
+         s1=Hello World!
+         s2=How are you?
+Concatanating s1 and s2 to s1. Now,
+         s1=Hello World! How are you?
+         s2=How are you?</pre></div><div class='prog'><pre>
+/**
+<h2>  * Linear Search
+</h2>  * Vishesh yadav
+  *
+  */
+
+#include&lt;stdio.h&gt;
+#include&lt;stdlib.h&gt;
+
+#define MAX_ELEMENTS 10
+
+void print_array(int *a, int len)
+{
+    int i;
+    printf("\n--------\n");
+    for (i=0; i&lt;len; i++)
+        printf("%d - ", a[i]);
+    printf("\n--------\n");
+}
+
+void get_array(int *a, int len)
+{
+    int i;
+    printf("\n\nArray Input: \n");
+    for (i=0; i&lt;len; i++) {
+        printf("Enter array[%d]: ", i);
+        scanf("%d", &amp;a[i]);
+    }
+    printf("\n");
+}
+
+int linear_search(int *arr, int len, int data)
+{
+    while (--len)
+        if (arr[len]==data)
+            return len;
+    return -1;
+}
+int main()
+{
+    int a[MAX_ELEMENTS], element, result;
+    get_array(a, MAX_ELEMENTS);
+    printf("You Entered: ");
+    print_array(a, MAX_ELEMENTS);
+    printf("What to search: ");
+    scanf("%d", &amp;element);
+    result = linear_search(a, MAX_ELEMENTS, element);
+    if (result&lt;0)
+        printf("\nElement Not Found");
+    else
+        printf("\nElement found at: %d", result);
+}
+
+</pre><h5>Output</h5><pre>
+
+Array Input:
+Enter array[0]: 56
+Enter array[1]: 23
+Enter array[2]: 11
+Enter array[3]: 98
+Enter array[4]: 67
+Enter array[5]: 45
+Enter array[6]: 32
+Enter array[7]: 21
+Enter array[8]: 45
+Enter array[9]: 90
+
+You Entered:
+--------
+56 - 23 - 11 - 98 - 67 - 45 - 32 - 21 - 45 - 90 -
+--------
+What to search: 67
+
+Element found at: 4Press any key to continue . . .
+
+</pre></div><div class='prog'><pre>
+/**
+<h2> * Circular Queue
+</h2> * Vishesh Yadav
+ *
+ */
+
+#include&lt;stdio.h&gt;
+#include&lt;stdlib.h&gt;
+
+
+struct Queue {
+    int *data;
+    int  front;
+    int  rear;
+    int  length;
+};
+
+struct Queue* CreateQueue(int length) {
+    struct Queue *nw = malloc( sizeof(struct Queue) );
+    nw-&gt;data = malloc( sizeof(int) * length );
+    nw-&gt;rear = 0;
+    nw-&gt;front = 0;
+    nw-&gt;length = length+1;
+    return nw;
+}
+
+void FreeQueue(struct Queue *q)
+{
+    free(q-&gt;data);
+    free(q);
+}
+
+int QueueEmpty(struct Queue *q)
+{
+    if ( q-&gt;front == q-&gt;rear )
+        return 1;
+    else
+        return 0;
+}
+
+int QueueFull(struct Queue *q)
+{
+    if ( (q-&gt;rear+1)%q-&gt;length == q-&gt;front )
+        return 1;
+    else
+        return 0;
+}
+
+int Enqueue(struct Queue *q, int data)
+{
+    if ( !QueueFull(q) ) {
+        q-&gt;data[q-&gt;rear] = data;
+        q-&gt;rear = (q-&gt;rear+1)%q-&gt;length;
+        return 1;
+    }
+    return 0;
+}
+
+int Dequeue(struct Queue *q)
+{
+    if ( !QueueEmpty(q) ) {
+        int ret = q-&gt;data[q-&gt;front];
+        q-&gt;front = (q-&gt;front+1)%q-&gt;length;
+        return ret;
+    }
+    return -1;
+}
+
+void PrintQueue(struct Queue *q)
+{
+    int i;
+    for (i=q-&gt;front; i%q-&gt;length!=q-&gt;rear; i++)
+        printf("%5d", q-&gt;data[i%q-&gt;length]);
+    printf("\n");
+}
+
+int main()
+{
+    struct Queue *q = CreateQueue(4);
+    char opt = ' ';
+
+    printf("\n\nQUEUE IMPLEMENTATION USING ARRATY\n");
+
+    while ( opt != 'x' ) {
+        printf("  1. Enqueue\n");
+        printf("  2. Dequeue\n");
+        printf("  x. Exit\n\n");
+
+        printf("\nWhat to do?\n");
+        fflush(stdin);
+        scanf("%c", &amp;opt);
+
+        if ( opt == '1' ) {
+            int x;
+            printf("\nEnter Data: ");
+            scanf("%d", &amp;x);
+            Enqueue(q, x);
+        } else if ( opt == '2' ) {
+            printf("\nDequeued  -&gt;  %d", Dequeue(q) );
+        } else if ( opt == 'x' ) {
+            break;
+        }
+        printf("\nQueue is now\n");
+        PrintQueue(q);
+    }
+    FreeQueue(q);
+    return 0;
+}
+
+</pre><h5>Output</h5><pre>
+
+QUEUE IMPLEMENTATION USING ARRATY
+  1. Enqueue
+  2. Dequeue
+  x. Exit
+
+
+What to do?
+1
+
+Enter Data: 3
+
+Queue is now
+    3
+  1. Enqueue
+  2. Dequeue
+  x. Exit
+
+
+What to do?
+1
+
+Enter Data: 6
+
+Queue is now
+    3    6
+  1. Enqueue
+  2. Dequeue
+  x. Exit
+
+
+What to do?
+1
+
+Enter Data: 9
+
+Queue is now
+    3    6    9
+  1. Enqueue
+  2. Dequeue
+  x. Exit
+
+
+What to do?
+1
+
+Enter Data: 2
+
+Queue is now
+    3    6    9    2
+  1. Enqueue
+  2. Dequeue
+  x. Exit
+
+
+What to do?
+2
+
+Dequeued  -&gt;  3
+Queue is now
+    6    9    2
+  1. Enqueue
+  2. Dequeue
+  x. Exit
+
+
+What to do?
+1
+
+Enter Data: 5
+
+Queue is now
+    6    9    2    5
+  1. Enqueue
+  2. Dequeue
+  x. Exit
+
+
+What to do?
+</pre></div><div class='prog'><pre>
+/**
+<h2>  * Merge Sort
+</h2>  * Vishesh yadav
+  *
+  */
+
+
+#include&lt;stdio.h&gt;
+#include&lt;stdlib.h&gt;
+
+#define MAX_ELEMENTS 10
+
+void print_array(int *a, int len)
+{
+    int i;
+    printf("\n--------\n");
+    for (i=0; i&lt;len; i++)
+        printf("%d - ", a[i]);
+    printf("\n--------\n");
+}
+
+void get_array(int *a, int len)
+{
+    int i;
+    printf("\n\nArray Input: \n");
+    for (i=0; i&lt;len; i++) {
+        printf("Enter array[%d]: ", i);
+        scanf("%d", &amp;a[i]);
+    }
+    printf("\n");
+}
+
+
+void merge ( int a[], int first, int mid, int last )
+{
+    int i = first, j = mid, k = 0;
+    int *save = malloc ( ( last - first ) * sizeof *save );
+
+    while ( i &lt; mid &amp;&amp; j &lt; last ) {
+        if ( a[i] &lt;= a[j] )
+            save[k++] = a[i++];
+        else
+            save[k++] = a[j++];
+
+    }
+
+    while ( i &lt; mid )
+        save[k++] = a[i++];
+
+    while ( j &lt; last )
+        save[k++] = a[j++];
+
+    for ( i = 0; i &lt; ( last - first ); i++ )
+        a[first + i] = save[i];
+
+    free ( save );
+}
+
+void mergesort_r ( int a[], int first, int last )
+{
+    if ( first &lt; last - 1 ) {
+        int mid = ( first + last ) / 2;
+        mergesort_r ( a, first, mid );
+        mergesort_r ( a, mid, last );
+        merge ( a, first, mid, last );
+    }
+}
+
+void mergesort ( int a[], int n )
+{
+    mergesort_r ( a, 0, n );
+}
+
+int main()
+{
+    int a[MAX_ELEMENTS];
+    get_array(a, MAX_ELEMENTS);
+    printf("You Entered: ");
+    print_array(a, MAX_ELEMENTS);
+    printf("After Sorting: ");
+    mergesort(a, MAX_ELEMENTS);
+    print_array(a, MAX_ELEMENTS);
+}
+
+</pre><h5>Output</h5><pre>
+
+Array Input:
+Enter array[0]: 76
+Enter array[1]: 35
+Enter array[2]: 78
+Enter array[3]: 54
+Enter array[4]: 34
+Enter array[5]: 21
+Enter array[6]: 98
+Enter array[7]: 67
+Enter array[8]: 54
+Enter array[9]: 32
+
+You Entered:
+--------
+76 - 35 - 78 - 54 - 34 - 21 - 98 - 67 - 54 - 32 -
+--------
+After Sorting:
+--------
+21 - 32 - 34 - 35 - 54 - 54 - 67 - 76 - 78 - 98 -
+--------</pre></div><div class='prog'><pre>
+/**
+<h2>  * Selection Sort
+</h2>  * Vishesh yadav
+  *
+  */
+
+#include&lt;stdio.h&gt;
+
+#define MAX_ELEMENTS 10
+
+typedef enum { false, true } bool;
+
+void print_array(int *a, int len)
+{
+    int i;
+    printf("\n--------\n");
+    for (i=0; i&lt;len; i++)
+        printf("%d - ", a[i]);
+    printf("\n--------\n");
+}
+
+void get_array(int *a, int len)
+{
+    int i;
+    printf("\n\nArray Input: \n");
+    for (i=0; i&lt;len; i++) {
+        printf("Enter array[%d]: ", i);
+        scanf("%d", &amp;a[i]);
+    }
+    printf("\n");
+}
+
+void selectionSort(int arr[], int n)
+{
+    int i, j, minIndex, tmp;
+    for (i = 0; i &lt; n - 1; i++) {
+        minIndex = i;
+        for (j = i + 1; j &lt; n; j++)
+            if (arr[j] &lt; arr[minIndex])
+                minIndex = j;
+        if (minIndex != i) {
+            tmp = arr[i];
+            arr[i] = arr[minIndex];
+            arr[minIndex] = tmp;
+        }
+    }
+}
+
+int main()
+{
+    int a[MAX_ELEMENTS];
+    get_array(a, MAX_ELEMENTS);
+    printf("You Entered: ");
+    print_array(a, MAX_ELEMENTS);
+    printf("After Sorting: ");
+    selectionSort(a, MAX_ELEMENTS);
+    print_array(a, MAX_ELEMENTS);
+}</pre><h5>Output</h5><pre>
+
+Array Input:
+Enter array[0]: 12
+Enter array[1]: 98
+Enter array[2]: 45
+Enter array[3]: 76
+Enter array[4]: 32
+Enter array[5]: 65
+Enter array[6]: 45
+Enter array[7]: 67
+Enter array[8]: 98
+Enter array[9]: 31
+
+You Entered:
+--------
+12 - 98 - 45 - 76 - 32 - 65 - 45 - 67 - 98 - 31 -
+--------
+After Sorting:
+--------
+12 - 31 - 32 - 45 - 45 - 65 - 67 - 76 - 98 - 98 -
+--------
+Press any key to continue . . .</pre></div><div class='prog'><pre>
+/**
+<h2>  * Bubble Sort
+</h2>  * Vishesh yadav
+  *
+  */
+
+#include&lt;stdio.h&gt;
+
+
+#define MAX_ELEMENTS 10
+
+
+typedef enum { false, true } bool;
+
+void print_array(int *a, int len)
+{
+    int i;
+    printf("\n--------\n");
+    for (i=0; i&lt;len; i++)
+        printf("%d - ", a[i]);
+    printf("\n--------\n");
+}
+
+void get_array(int *a, int len)
+{
+    int i;
+    printf("\n\nArray Input: \n");
+    for (i=0; i&lt;len; i++) {
+        printf("Enter array[%d]: ", i);
+        scanf("%d", &amp;a[i]);
+    }
+    printf("\n");
+}
+
+void bubbleSort(int arr[], int n)
+{
+    bool swapped = true;
+    int j = 0, i;
+    int tmp;
+    while (swapped) {
+        swapped = false;
+        j++;
+        for (i = 0; i &lt; n - j; i++) {
+            if (arr[i] &gt; arr[i + 1]) {
+                tmp = arr[i];
+                arr[i] = arr[i + 1];
+                arr[i + 1] = tmp;
+                swapped = true;
+            }
+        }
+    }
+}
+
+
+int main()
+{
+    int a[MAX_ELEMENTS];
+    get_array(a, MAX_ELEMENTS);
+    printf("You Entered: ");
+    print_array(a, MAX_ELEMENTS);
+    printf("After Sorting: ");
+    bubbleSort(a, MAX_ELEMENTS);
+    print_array(a, MAX_ELEMENTS);
+}</pre><h5>Output</h5><pre>
+
+Array Input:
+Enter array[0]: 323
+Enter array[1]: 2
+Enter array[2]: 24
+Enter array[3]: 12
+Enter array[4]: 75
+Enter array[5]: 43
+Enter array[6]: 21
+Enter array[7]: 78
+Enter array[8]: 32
+Enter array[9]: 98
+
+You Entered:
+--------
+323 - 2 - 24 - 12 - 75 - 43 - 21 - 78 - 32 - 98 -
+--------
+After Sorting:
+--------
+2 - 12 - 21 - 24 - 32 - 43 - 75 - 78 - 98 - 323 -
+--------</pre></div><div class='prog'><pre>
+/**
+<h2> * Stack implementation using Linked List
+</h2> * Vishesh Yadav
+ *
+ */
+
+
+#include&lt;stdio.h&gt;
+#include&lt;stdlib.h&gt;
+
+
+typedef struct _list_node {
+    struct _list_node* next;
+    int data;
+} ListNode;
+
+typedef struct {
+    ListNode *head;
+} Stack;
+
+ListNode* stack_get_head(Stack *l)
+{
+    return l-&gt;head;
+}
+
+ListNode* list_create_node(int data, ListNode* next)
+{
+    ListNode *node = (ListNode*)malloc(sizeof(ListNode));
+    if (node) {
+        node-&gt;data = data;
+        node-&gt;next = next;
+    }
+    return node;
+}
+
+Stack* stack_new()
+{
+    Stack* stack = (Stack*)malloc(sizeof(Stack));
+    if (stack)
+        stack-&gt;head = NULL;
+    return stack;
+}
+
+void stack_free(Stack *l)
+{
+    ListNode *node = stack_get_head(l), *temp;
+    while (node)	{
+        temp = node;
+        node = node-&gt;next;
+        free(temp);
+    }
+}
+
+int stack_is_empty(Stack* l)
+{
+    return l-&gt;head==NULL;
+}
+
+int stack_push(Stack* s, int data)
+{
+    ListNode *node = list_create_node(data, s-&gt;head);
+    if (!node)
+        return 0;
+    s-&gt;head = node;
+    return 1;
+}
+
+int stack_pop(Stack* s)
+{
+    ListNode *new_front;
+    int ret;
+    if (stack_is_empty(s))
+        return -1;
+    new_front = s-&gt;head-&gt;next;
+    ret = s-&gt;head-&gt;data;
+    free(s-&gt;head);
+    s-&gt;head = new_front;
+    return ret;
+}
+
+void print_stack(Stack *l)
+{
+    ListNode *node = stack_get_head(l);
+    printf("\n----\n");
+    while (node)	{
+        printf("%d    ", node-&gt;data);
+        node = node-&gt;next;
+    }
+    printf("\n----\n\n");
+}
+
+int main()
+{
+    Stack *s = stack_new(10);
+    char choice = '\0';
+    int data;
+
+    while (choice!='x') {
+        printf("\nStack using List\n--------------------------------");
+        printf("\n\n\nWhat would you like to do?\n");
+        printf("\n  1. Push");
+        printf("\n  2. Pop");
+        printf("\n  3. Print the Stack contents");
+        printf("\n  x. Exit");
+        printf("\n\nEnter Choice: ");
+        fflush(stdin);
+        scanf("%c", &amp;choice);
+        printf("-----\n");
+        switch (choice) {
+        case 'x':
+            break;
+        case '1':
+            printf("\nEnter data: ");
+            scanf("%d", &amp;data);
+            stack_push(s, data);
+            print_stack(s);
+            break;
+        case '2':
+            printf("\nPopped: %d", stack_pop(s));
+            print_stack(s);
+            break;
+        case '3':
+            print_stack(s);
+            break;
+        }
+
+    }
+    stack_free(s);
+}
+</pre><h5>Output</h5><pre>
+Stack using List
+--------------------------------
+
+
+What would you like to do?
+
+  1. Push
+  2. Pop
+  3. Print the Stack contents
+  x. Exit
+
+Enter Choice: 1
+-----
+
+Enter data: 4
+
+----
+4
+----
+
+
+Stack using List
+--------------------------------
+
+
+What would you like to do?
+
+  1. Push
+  2. Pop
+  3. Print the Stack contents
+  x. Exit
+
+Enter Choice: 1
+-----
+
+Enter data: 5
+
+----
+5    4
+----
+
+
+Stack using List
+--------------------------------
+
+
+What would you like to do?
+
+  1. Push
+  2. Pop
+  3. Print the Stack contents
+  x. Exit
+
+Enter Choice: 1
+-----
+
+Enter data: 9
+
+----
+9    5    4
+----
+
+
+Stack using List
+--------------------------------
+
+
+What would you like to do?
+
+  1. Push
+  2. Pop
+  3. Print the Stack contents
+  x. Exit
+
+Enter Choice: 2
+-----
+
+Popped: 9
+----
+5    4
+----
+
+
+Stack using List
+--------------------------------
+
+
+What would you like to do?
+
+  1. Push
+  2. Pop
+  3. Print the Stack contents
+  x. Exit
+
+Enter Choice: 2
+-----
+
+Popped: 5
+----
+4
+----
+
+
+Stack using List
+--------------------------------
+
+
+What would you like to do?
+
+  1. Push
+  2. Pop
+  3. Print the Stack contents
+  x. Exit
+
+Enter Choice: x
+-----</pre></div><div class='prog'><pre>
+/**
+<h2> * Average
+</h2> * Vishesh Yadav
+ *
+ */
+
+#include&lt;stdio.h&gt;
+
+int main()
+{
+    int a, b, c;
+    char d;
+    float e;
+
+    printf("Enter numbers(a, b, c): ");
+    scanf("%d  %d  %d", &amp;a, &amp;b, &amp;c);
+
+    e = (float)(a+b+c)/3;
+
+    printf("Average: %f", e);
+    printf("\nSum: %d", a+b+c);
+}
+</pre><h5>Output</h5><pre>Enter numbers(a, b, c): 2 8 9
+Average: 6.333333
+Sum: 19
+
+
+
+</pre></div><div class='prog'><pre>
+/**
+<h2> * Factorial using Recursion
+</h2> * Vishesh Yadav
+ *
+ */
+
+#include&lt;stdio.h&gt;
+
+int factorial(int num)
+{
+    return (num==1) ?1 :factorial(num-1)*num;
+}
+
+int main()
+{
+    int x;
+    printf("\nEnter X: ");
+    scanf("%d%*c", &amp;x);
+    printf("Factorial is:  %d", factorial(x));
+    getchar();
+    return 0;
+}
+</pre><h5>Output</h5><pre>
+Enter number: 6
+Factorial is: 720</pre></div><div class='prog'><pre>
+/**
+<h2>  * Binary Search
+</h2>  * Vishesh yadav
+  *
+  */
+
+#include&lt;stdio.h&gt;
+#include&lt;stdlib.h&gt;
+
+#define MAX_ELEMENTS 10
+
+void print_array(int *a, int len)
+{
+    int i;
+    printf("\n--------\n");
+    for (i=0; i&lt;len; i++)
+        printf("%d - ", a[i]);
+    printf("\n--------\n");
+}
+
+void get_array(int *a, int len)
+{
+    int i;
+    printf("\n\nArray Input: \n");
+    for (i=0; i&lt;len; i++) {
+        printf("Enter array[%d]: ", i);
+        scanf("%d", &amp;a[i]);
+    }
+    printf("\n");
+}
+
+int binary_search(int *arr, int len, int data)
+{
+    int min = 0, max = len;
+    while ( min&lt;max ) {
+        int mid = (min+max)/2;
+        if (arr[mid]&lt;data)
+            min = mid+1;
+        else if (arr[mid]&gt;data)
+            max = mid-1;
+        else if (arr[mid]==data)
+            return mid;
+    }
+    return -1;
+}
+
+int main()
+{
+    int a[MAX_ELEMENTS], element, result;
+    get_array(a, MAX_ELEMENTS);
+    printf("You Entered: ");
+    print_array(a, MAX_ELEMENTS);
+    printf("What to search: ");
+    scanf("%d", &amp;element);
+    result = binary_search(a, MAX_ELEMENTS, element);
+    if (result&lt;0)
+        printf("\nElement Not Found");
+    else
+        printf("\nElement found at: %d", result);
+}
+
+</pre><h5>Output</h5><pre>
+
+Array Input:
+Enter array[0]: 1
+Enter array[1]: 6
+Enter array[2]: 8
+Enter array[3]: 9
+Enter array[4]: 12
+Enter array[5]: 18
+Enter array[6]: 21
+Enter array[7]: 32
+Enter array[8]: 45
+Enter array[9]: 54
+
+You Entered:
+--------
+1 - 6 - 8 - 9 - 12 - 18 - 21 - 32 - 45 - 54 -
+--------
+What to search: 21
+
+Element found at: 6
+</pre></div><div class='prog'><pre>
+/**
+<h2>  * Quick Sort
+</h2>  * Vishesh yadav
+  *
+  */
+
+
+#include &lt;stdio.h&gt;
+#include &lt;stdlib.h&gt;
+
+#define MAX_ELEMENTS 10
+
+void print_array(int *a, int len)
+{
+    int i;
+    printf("\n--------\n");
+    for (i=0; i&lt;len; i++)
+        printf("%d - ", a[i]);
+    printf("\n--------\n");
+}
+
+void get_array(int *a, int len)
+{
+    int i;
+    printf("\n\nArray Input: \n");
+    for (i=0; i&lt;len; i++) {
+        printf("Enter array[%d]: ", i);
+        scanf("%d", &amp;a[i]);
+    }
+    printf("\n");
+}
+
+void swap(int *x,int *y)
+{
+    int temp;
+    temp = *x;
+    *x = *y;
+    *y = temp;
+}
+
+int choose_pivot(int i,int j )
+{
+    return((i+j) /2);
+}
+
+void quicksort(int list[],int m,int n)
+{
+    int key,i,j,k;
+    if ( m &lt; n) {
+        k = choose_pivot(m,n);
+        swap(&amp;list[m],&amp;list[k]);
+        key = list[m];
+        i = m+1;
+        j = n;
+        while (i &lt;= j) {
+            while ((i &lt;= n) &amp;&amp; (list[i] &lt;= key))
+                i++;
+            while ((j &gt;= m) &amp;&amp; (list[j] &gt; key))
+                j--;
+            if ( i &lt; j)
+                swap(&amp;list[i],&amp;list[j]);
+        }
+        // swap two elements
+        swap(&amp;list[m],&amp;list[j]);
+        // recursively sort the lesser list
+        quicksort(list,m,j-1);
+        quicksort(list,j+1,n);
+    }
+}
+
+
+int main()
+{
+    int a[MAX_ELEMENTS];
+    get_array(a, MAX_ELEMENTS);
+    printf("You Entered: ");
+    print_array(a, MAX_ELEMENTS);
+    printf("After Sorting: ");
+    quicksort(a, 0, MAX_ELEMENTS-1);
+    print_array(a, MAX_ELEMENTS);
+}</pre><h5>Output</h5><pre>
+
+Array Input:
+Enter array[0]: 12
+Enter array[1]: 82
+Enter array[2]: 34
+Enter array[3]: 65
+Enter array[4]: 87
+Enter array[5]: 46
+Enter array[6]: 21
+Enter array[7]: 34
+Enter array[8]: 90
+Enter array[9]: 64
+
+You Entered:
+--------
+12 - 82 - 34 - 65 - 87 - 46 - 21 - 34 - 90 - 64 -
+--------
+After Sorting:
+--------
+12 - 21 - 34 - 34 - 46 - 64 - 65 - 82 - 87 - 90 -
+--------</pre></div><div class='prog'><pre>
+/**
+<h2>  * Insertion Sort
+</h2>  * Vishesh yadav
+  *
+  */
+
+#include&lt;stdio.h&gt;
+
+#define MAX_ELEMENTS 10
+
+void print_array(int *a, int len)
+{
+    int i;
+    printf("\n--------\n");
+    for (i=0; i&lt;len; i++)
+        printf("%d - ", a[i]);
+    printf("\n--------\n");
+}
+
+void get_array(int *a, int len)
+{
+    int i;
+    printf("\n\nArray Input: \n");
+    for (i=0; i&lt;len; i++) {
+        printf("Enter array[%d]: ", i);
+        scanf("%d", &amp;a[i]);
+    }
+    printf("\n");
+}
+
+void insertionSort(int arr[], int length)
+{
+    int i, j, tmp;
+    for (i = 1; i &lt; length; i++) {
+        j = i;
+        while (j &gt; 0 &amp;&amp; arr[j - 1] &gt; arr[j]) {
+            tmp = arr[j];
+            arr[j] = arr[j - 1];
+            arr[j - 1] = tmp;
+            j--;
+        }
+    }
+}
+
+int main()
+{
+    int a[MAX_ELEMENTS];
+    get_array(a, MAX_ELEMENTS);
+    printf("You Entered: ");
+    print_array(a, MAX_ELEMENTS);
+    printf("After Sorting: ");
+    insertionSort(a, MAX_ELEMENTS);
+    print_array(a, MAX_ELEMENTS);
+}
+</pre><h5>Output</h5><pre>
+
+Array Input:
+Enter array[0]: 12
+Enter array[1]: 98
+Enter array[2]: 45
+Enter array[3]: 76
+Enter array[4]: 32
+Enter array[5]: 65
+Enter array[6]: 45
+Enter array[7]: 67
+Enter array[8]: 98
+Enter array[9]: 31
+
+You Entered:
+--------
+12 - 98 - 45 - 76 - 32 - 65 - 45 - 67 - 98 - 31 -
+--------
+After Sorting:
+--------
+12 - 31 - 32 - 45 - 45 - 65 - 67 - 76 - 98 - 98 -
+--------
+Press any key to continue . . .</pre></div><div class='prog'><pre>
+/**
+<h2> * Linked List using Arrays
+</h2> * Vishesh Yadav
+ *
+ */
+
+
+#include&lt;stdio.h&gt;
+#include&lt;stdlib.h&gt;
+
+
+typedef struct _list_node {
+    int next;
+    int data;
+    int occupied;
+} ListNode;
+
+typedef struct {
+    ListNode *nodes;
+    int head;
+    int size;
+    int total;
+} List;
+
+ListNode* list_get_node(List *list, int pos)
+{
+    if (pos&lt;0 || pos&gt;=list-&gt;size)
+        return NULL;
+    return (list-&gt;nodes+pos);
+}
+
+ListNode* list_get_head(List *l)
+{
+    return list_get_node(l, l-&gt;head);
+}
+
+ListNode* list_get_next(List *l, ListNode *node)
+{
+    return list_get_node(l, node-&gt;next);
+}
+
+int list_find_free_pos(List *l)
+{
+    int i;
+    for (i=0; i&lt;(l-&gt;size); i++)
+        if ( list_get_node(l, i)-&gt;occupied==0 )
+            return i;
+    return -1;
+}
+
+ListNode* list_create_node(List *l, int data, int next, int *position)
+{
+    int free_pos = list_find_free_pos(l);
+    ListNode *node =  list_get_node(l, free_pos);
+    if (position)
+        *position = free_pos;
+    if (node) {
+        node-&gt;data = data;
+        node-&gt;next = next;
+        node-&gt;occupied = 1;
+    }
+    return node;
+}
+
+List* list_new(int size)
+{
+    List* list = (List*)malloc(sizeof(List));
+    if (list) {
+        int i;
+        list-&gt;nodes = (ListNode*)malloc(sizeof(ListNode)*size);
+        if (!list-&gt;nodes) {
+            free(list);
+            return NULL;
+        }
+        for (i=0; i&lt;size; i++)
+            list-&gt;nodes[i].occupied = 0;
+        list-&gt;head = -1;
+        list-&gt;size = size;
+        list-&gt;total = 0;
+    }
+    return list;
+}
+
+void list_free(List *l)
+{
+    free(l-&gt;nodes);
+    free(l);
+}
+
+int list_is_empty(List* l)
+{
+    return l-&gt;head==-1;
+}
+
+int list_is_full(List* l)
+{
+    return l-&gt;total==l-&gt;size;
+}
+
+
+int list_push_front(List* l, int data)
+{
+    int pos;
+    ListNode *node = list_create_node(l, data, l-&gt;head, &amp;pos);
+    if (!node)
+        return 0;
+    l-&gt;head = pos;
+    ++l-&gt;total;
+    return 1;
+}
+
+int list_insert_at(List *l, int pos, int data)
+{
+    ListNode *node;
+    int i, position;
+    int at = l-&gt;head, pat;
+
+    if (pos==0)
+        return list_push_front(l, data);
+
+    for (i=0; i&lt;pos; i++) {
+        pat = at;
+        at = list_get_node(l, at)-&gt;next;
+        if (at&lt;0 &amp;&amp; i!=pos-1)
+            return 0;
+    }
+
+    node = list_create_node(l, data, at, &amp;position);
+    if (node)
+        list_get_node(l, pat)-&gt;next = position;
+    ++l-&gt;total;
+    return node!=NULL;
+}
+
+ListNode* list_get_tail(List *l)
+{
+    ListNode *node = list_get_head(l);
+    if (!node)
+        return NULL;
+    while (node-&gt;next &gt;= 0)
+        node = list_get_next(l, node);
+    ++l-&gt;total;
+    return node;
+}
+
+int list_push_back(List *l, int data)
+{
+    ListNode *node;
+    ListNode *last = list_get_tail(l);
+    int pos;
+
+    if (!last)
+        return list_push_front(l, data);
+
+    node = list_create_node(l, data, -1, &amp;pos);
+    if (!node)
+        return 0;
+    last-&gt;next = pos;
+    ++l-&gt;total;
+    return 1;
+}
+
+int list_pop_back(List* l)
+{
+    int last = l-&gt;head, last2 = -1;
+    if (list_is_empty(l))
+        return 0;
+    while (list_get_node(l, last)-&gt;next&gt;=0) {
+        last2 = last;
+        last = list_get_node(l, last)-&gt;next;
+    }
+    list_get_node(l, last)-&gt;occupied = 0;
+    if (last2&gt;=0)
+        list_get_node(l, last2)-&gt;next = -1;
+    else {
+        list_get_head(l)-&gt;occupied = 0;
+        l-&gt;head = -1;
+    }
+    --l-&gt;total;
+    return 1;
+}
+
+int list_pop_front(List* l)
+{
+    int new_front;
+    if (list_is_empty(l))
+        return 0;
+    new_front = list_get_head(l)-&gt;next;
+    list_get_head(l)-&gt;occupied = 0;
+    l-&gt;head = new_front;
+    return 1;
+}
+
+int list_delete_at(List *l, int pos)
+{
+    int i;
+    int at = l-&gt;head, pat;
+    if (list_is_empty(l))
+        return 0;
+
+    if (pos==0)
+        return list_pop_front(l);
+
+    for (i=0; i&lt;pos; i++) {
+        pat = at;
+        at = list_get_node(l, at)-&gt;next;
+        if (!at &amp;&amp; i!=pos-1)
+            return 0;
+    }
+    list_get_node(l, pat)-&gt;next = list_get_node(l, at)-&gt;next;
+    list_get_node(l, at)-&gt;occupied = 0;
+    return 1;
+}
+
+void print_list(List *l)
+{
+    ListNode *node = list_get_head(l);
+    printf("\n----\n");
+    while (node)	{
+        printf("%d    ", node-&gt;data);
+        node = list_get_next(l, node);
+    }
+    printf("\n----\n\n");
+}
+
+int main()
+{
+    List *l = list_new(10);
+    char choice = '\0';
+    int pos, data;
+
+    while (choice!='x') {
+        printf("\nLinked List using Array\n--------------------------------");
+        printf("\n\n\nWhat would you like to do?\n");
+        printf("\n  1. Insert at First Position");
+        printf("\n  2. Insert at Last Position");
+        printf("\n  3. Insert at nth Position");
+        printf("\n  4. Delete First Element");
+        printf("\n  5. Delete Last Element");
+        printf("\n  6. Delete from nth Position");
+        printf("\n  7. Print the List");
+        printf("\n  x. Exit");
+        printf("\n\nEnter Choice: ");
+        fflush(stdin);
+        scanf("%c", &amp;choice);
+        printf("-----\n");
+        switch (choice) {
+        case 'x':
+            break;
+        case '1':
+            printf("\nEnter data: ");
+            scanf("%d", &amp;data);
+            list_push_front(l, data);
+            print_list(l);
+            break;
+        case '2':
+            printf("\nEnter data: ");
+            scanf("%d", &amp;data);
+            list_push_back(l, data);
+            print_list(l);
+            break;
+        case '3':
+            printf("\nEnter data: ");
+            scanf("%d", &amp;data);
+            printf("Enter position: ");
+            scanf("%d", &amp;pos);
+            list_insert_at(l, pos, data);
+            print_list(l);
+            break;
+        case '4':
+            list_pop_front(l);
+            print_list(l);
+            break;
+        case '5':
+            list_pop_back(l);
+            print_list(l);
+            break;
+        case '6':
+            printf("Enter position: ");
+            scanf("%d", &amp;pos);
+            list_delete_at(l, pos);
+            print_list(l);
+            break;
+        case '7':
+            print_list(l);
+            break;
+        }
+
+    }
+    list_free(l);
+}
+</pre><h5>Output</h5><pre>
+Linked List using Array
+--------------------------------
+
+
+What would you like to do?
+
+  1. Insert at First Position
+  2. Insert at Last Position
+  3. Insert at nth Position
+  4. Delete First Element
+  5. Delete Last Element
+  6. Delete from nth Position
+  7. Print the List
+  x. Exit
+
+Enter Choice: 1
+-----
+
+Enter data: 2
+
+----
+2
+----
+
+
+Linked List using Array
+--------------------------------
+
+
+What would you like to do?
+
+  1. Insert at First Position
+  2. Insert at Last Position
+  3. Insert at nth Position
+  4. Delete First Element
+  5. Delete Last Element
+  6. Delete from nth Position
+  7. Print the List
+  x. Exit
+
+Enter Choice: 1
+-----
+
+Enter data: 2
+
+----
+2    2
+----
+
+
+Linked List using Array
+--------------------------------
+
+
+What would you like to do?
+
+  1. Insert at First Position
+  2. Insert at Last Position
+  3. Insert at nth Position
+  4. Delete First Element
+  5. Delete Last Element
+  6. Delete from nth Position
+  7. Print the List
+  x. Exit
+
+Enter Choice: 2
+-----
+
+Enter data: 3
+
+----
+2    2    3
+----
+
+
+Linked List using Array
+--------------------------------
+
+
+What would you like to do?
+
+  1. Insert at First Position
+  2. Insert at Last Position
+  3. Insert at nth Position
+  4. Delete First Element
+  5. Delete Last Element
+  6. Delete from nth Position
+  7. Print the List
+  x. Exit
+
+Enter Choice: 2
+-----
+
+Enter data: 5
+
+----
+2    2    3    5
+----
+
+
+Linked List using Array
+--------------------------------
+
+
+What would you like to do?
+
+  1. Insert at First Position
+  2. Insert at Last Position
+  3. Insert at nth Position
+  4. Delete First Element
+  5. Delete Last Element
+  6. Delete from nth Position
+  7. Print the List
+  x. Exit
+
+Enter Choice: 2
+-----
+
+Enter data: 9
+
+----
+2    2    3    5    9
+----
+
+
+Linked List using Array
+--------------------------------
+
+
+What would you like to do?
+
+  1. Insert at First Position
+  2. Insert at Last Position
+  3. Insert at nth Position
+  4. Delete First Element
+  5. Delete Last Element
+  6. Delete from nth Position
+  7. Print the List
+  x. Exit
+
+Enter Choice: 3
+-----
+
+Enter data: 11
+Enter position: 2
+
+----
+2    2    11    3    5    9
+----
+
+
+Linked List using Array
+--------------------------------
+
+
+What would you like to do?
+
+  1. Insert at First Position
+  2. Insert at Last Position
+  3. Insert at nth Position
+  4. Delete First Element
+  5. Delete Last Element
+  6. Delete from nth Position
+  7. Print the List
+  x. Exit
+
+Enter Choice: 4
+-----
+
+----
+2    11    3    5    9
+----
+
+
+Linked List using Array
+--------------------------------
+
+
+What would you like to do?
+
+  1. Insert at First Position
+  2. Insert at Last Position
+  3. Insert at nth Position
+  4. Delete First Element
+  5. Delete Last Element
+  6. Delete from nth Position
+  7. Print the List
+  x. Exit
+
+Enter Choice: 5
+-----
+
+----
+2    11    3    5
+----
+
+
+Linked List using Array
+--------------------------------
+
+
+What would you like to do?
+
+  1. Insert at First Position
+  2. Insert at Last Position
+  3. Insert at nth Position
+  4. Delete First Element
+  5. Delete Last Element
+  6. Delete from nth Position
+  7. Print the List
+  x. Exit
+
+Enter Choice: 6
+-----
+Enter position: 2
+
+----
+2    11    5
+----
+
+
+Linked List using Array
+--------------------------------
+
+
+What would you like to do?
+
+  1. Insert at First Position
+  2. Insert at Last Position
+  3. Insert at nth Position
+  4. Delete First Element
+  5. Delete Last Element
+  6. Delete from nth Position
+  7. Print the List
+  x. Exit
+
+Enter Choice: 7
+-----
+
+----
+2    11    5
+----
+
+
+Linked List using Array
+--------------------------------
+
+
+What would you like to do?
+
+  1. Insert at First Position
+  2. Insert at Last Position
+  3. Insert at nth Position
+  4. Delete First Element
+  5. Delete Last Element
+  6. Delete from nth Position
+  7. Print the List
+  x. Exit
+
+Enter Choice: x
+-----</pre></div><div class='prog'><pre>/**
+<h2>  * String Operation: strcmp[user defined]
+</h2>  * Vishesh yadav
+  *
+  */
+
+#include&lt;stdio.h&gt;
+#include&lt;string.h&gt;
+
+#define MAX 50
+
+int main(void)
+{
+    char s1[MAX], s2[50];
+
+    printf("Enter s1: ");
+    gets(s1);
+    printf("Enter s2: ");
+    gets(s2);
+
+    printf("\t s1=%s \n\t s2=%s \n",s1,s2);
+
+    printf("strcmp over s1 and s2=%i",strcmp(s1,s2));
+
+    return 0;
+}
+
+</pre><h5>Output</h5><pre>Enter s1: hello
+Enter s2: helwo
+         s1=hello
+         s2=helwo
+strcmp over s1 and s2=-11
+
+
+
+</pre></div><div class='prog'><pre>/**
+<h2>  * String Operation: strlen[user defined]
+</h2>  * Vishesh yadav
+  *
+  */
+
+#include&lt;stdio.h&gt;
+
+int strlen(char *s)
+{
+    char* t=s;
+    while (*t++);
+    t--;
+    return t-s;
+}
+
+#define MAX 50
+
+int main(void)
+{
+    char s1[MAX];
+
+    printf("Enter s1: ");
+    gets(s1);
+
+    printf("length of s1 = %d", strlen(s1));
+
+    return 0;
+}
+
+</pre><h5>Output</h5><pre>Enter s1: vishesh
+length of s1 = 7
+
+
+
+
+
+
+
+
+
+
+</pre></div><div class='prog'><pre>
+/**
+<h2> * Matrix Multiplication
+</h2> * Vishesh Yadav
+ *
+ */
+
+#include&lt;stdio.h&gt;
+
+
+#define ORDER 2
+
+
+void mulMatrix(int a[][ORDER], int b[][ORDER], int c[][ORDER])
+{
+    int i;
+    for (i=0; i&lt;ORDER; i++) {
+        int j;
+        for (j=0; j&lt;ORDER; j++) {
+            int k;
+            c[i][j] = 0;
+            for (k=0; k&lt;ORDER; k++) {
+                c[i][j] += a[i][k]*b[k][j];
+            }
+        }
+    }
+}
+
+void getMatrix(int mat[][ORDER])
+{
+    int i;
+    for (i=0; i&lt;ORDER; i++) {
+        int j;
+        for (j=0; j&lt;ORDER; j++) {
+            printf("\nEnter matrix[%d][%d]: ", i, j);
+            scanf("%d", &amp;mat[i][j]);
+        }
+    }
+}
+
+void printMatrix(int mat[][ORDER])
+{
+    int i;
+    for (i=0; i&lt;ORDER; i++) {
+        int j;
+        for (j=0; j&lt;ORDER; j++) {
+            printf("%5d", mat[i][j]);
+        }
+        printf("\n");
+    }
+}
+
+
+int main()
+{
+    int a[ORDER][ORDER], b[ORDER][ORDER], c[ORDER][ORDER];
+
+    printf("\n\nENTER MATRIX A\n");
+    getMatrix(a);
+    printMatrix(a);
+
+    printf("\n\nENTER MATRIX B\n");
+    getMatrix(b);
+    printMatrix(b);
+
+    printf("\n\nMATRIX MULTIPLICATION RESULT\n");
+    mulMatrix(a, b, c);
+    printMatrix(c);
+
+    fflush(stdin);
+    getchar();
+    return 0;
+}
+</pre><h5>Output</h5><pre>
+
+ENTER MATRIX A
+
+Enter matrix[0][0]: 1
+
+Enter matrix[0][1]: 5
+
+Enter matrix[1][0]: 3
+
+Enter matrix[1][1]: 8
+    1    5
+    3    8
+
+
+ENTER MATRIX B
+
+Enter matrix[0][0]: 3
+
+Enter matrix[0][1]: 8
+
+Enter matrix[1][0]: 1
+
+Enter matrix[1][1]: 3
+    3    8
+    1    3
+
+
+MATRIX MULTIPLICATION RESULT
+    8   23
+   17   48
+</pre></div><div class='prog'><pre>
+/**
+<h2> * Doubly Linked List using Dynamic Memory Allocation
+</h2> * Vishesh Yadav
+ *
+ */
+
+
+#include&lt;stdio.h&gt;
+#include&lt;stdlib.h&gt;
+
+
+typedef struct _list_node {
+    struct _list_node *next, *previous;
+    int data;
+} ListNode;
+
+typedef struct {
+    ListNode *head;
+} List;
+
+ListNode* list_get_head(List *l)
+{
+    return l-&gt;head;
+}
+
+ListNode* list_create_node(int data, ListNode* next, ListNode* previous)
+{
+    ListNode *node = (ListNode*)malloc(sizeof(ListNode));
+    if (node) {
+        node-&gt;data = data;
+        node-&gt;next = next;
+        node-&gt;previous = previous;
+        if (next)
+            next-&gt;previous = node;
+        if (previous)
+            previous-&gt;next = node;
+    }
+    return node;
+}
+
+List* list_new()
+{
+    List* list = (List*)malloc(sizeof(List));
+    if (list)
+        list-&gt;head = NULL;
+    return list;
+}
+
+void list_free(List *l)
+{
+    ListNode *node = list_get_head(l), *temp;
+    while (node)	{
+        temp = node;
+        node = node-&gt;next;
+        free(temp);
+    }
+}
+
+int list_is_empty(List* l)
+{
+    return l-&gt;head==NULL;
+}
+
+int list_push_front(List* l, int data)
+{
+    ListNode *node = list_create_node(data, l-&gt;head, NULL);
+    if (!node)
+        return 0;
+    l-&gt;head = node;
+    return 1;
+}
+
+int list_insert_at(List *l, int pos, int data)
+{
+    int i;
+    ListNode *at = list_get_head(l), *node;
+
+    if (pos==0)
+        return list_push_front(l, data);
+
+    for (i=0; i&lt;pos; i++) {
+        at = at-&gt;next;
+        if (!at &amp;&amp; i!=pos-1)
+            return 0;
+    }
+
+    node = list_create_node(data, at, at-&gt;previous);
+    return node!=NULL;
+}
+
+ListNode* list_get_tail(List *l)
+{
+    ListNode *node = list_get_head(l);
+    if (!node)
+        return NULL;
+    while (node-&gt;next)
+        node = node-&gt;next;
+    return node;
+}
+
+int list_push_back(List *l, int data)
+{
+    ListNode *node;
+    ListNode *last = list_get_tail(l);
+
+    if (!last)
+        return list_push_front(l, data);
+
+    node = list_create_node(data, NULL, last);
+    if (!node)
+        return 0;
+    return 1;
+}
+
+void list_free_node(ListNode* node)
+{
+    if (node-&gt;previous)
+        node-&gt;previous-&gt;next = node-&gt;next;
+    if (node-&gt;next)
+        node-&gt;next-&gt;previous = node-&gt;previous;
+}
+
+int list_pop_back(List* l)
+{
+    ListNode *last;;
+    if (list_is_empty(l))
+        return 0;
+    last = list_get_tail(l);
+    list_free_node(last);
+    return 1;
+}
+
+int list_pop_front(List* l)
+{
+    ListNode *new_front;
+    if (list_is_empty(l))
+        return 0;
+    new_front = list_get_head(l)-&gt;next;
+    list_free_node(list_get_head(l));
+    l-&gt;head = new_front;
+    return 1;
+}
+
+int list_delete_at(List *l, int pos)
+{
+    int i;
+    ListNode *at = list_get_head(l);
+    if (list_is_empty(l))
+        return 0;
+
+    if (pos==0)
+        return list_pop_front(l);
+
+    for (i=0; i&lt;pos; i++) {
+        at = at-&gt;next;
+        if (!at &amp;&amp; i!=pos-1)
+            return 0;
+    }
+
+    list_free_node(at);
+    return 1;
+}
+
+void print_list(List *l)
+{
+    ListNode *node = list_get_head(l);
+    printf("\n----\n");
+    while (node)	{
+        printf("%d    ", node-&gt;data);
+        node = node-&gt;next;
+    }
+    printf("\n----\n\n");
+}
+
+int main()
+{
+    List *l = list_new();
+    char choice = '\0';
+    int pos, data;
+
+    while (choice!='x') {
+        printf("\nLinked List\n--------------------------------");
+        printf("\n\n\nWhat would you like to do?\n");
+        printf("\n  1. Insert at First Position");
+        printf("\n  2. Insert at Last Position");
+        printf("\n  3. Insert at nth Position");
+        printf("\n  4. Delete First Element");
+        printf("\n  5. Delete Last Element");
+        printf("\n  6. Delete from nth Position");
+        printf("\n  7. Print the List");
+        printf("\n  x. Exit");
+        printf("\n\nEnter Choice: ");
+        fflush(stdin);
+        scanf("%c", &amp;choice);
+        printf("-----\n");
+        switch (choice) {
+        case 'x':
+            break;
+        case '1':
+            printf("\nEnter data: ");
+            scanf("%d", &amp;data);
+            list_push_front(l, data);
+            print_list(l);
+            break;
+        case '2':
+            printf("\nEnter data: ");
+            scanf("%d", &amp;data);
+            list_push_back(l, data);
+            print_list(l);
+            break;
+        case '3':
+            printf("\nEnter data: ");
+            scanf("%d", &amp;data);
+            printf("Enter position: ");
+            scanf("%d", &amp;pos);
+            list_insert_at(l, pos, data);
+            print_list(l);
+            break;
+        case '4':
+            list_pop_front(l);
+            print_list(l);
+            break;
+        case '5':
+            list_pop_back(l);
+            print_list(l);
+            break;
+        case '6':
+            printf("Enter position: ");
+            scanf("%d", &amp;pos);
+            list_delete_at(l, pos);
+            print_list(l);
+            break;
+        case '7':
+            print_list(l);
+            break;
+        }
+
+    }
+    list_free(l);
+}
+</pre><h5>Output</h5><pre>Linked List
+--------------------------------
+
+
+What would you like to do?
+
+  1. Insert at First Position
+  2. Insert at Last Position
+  3. Insert at nth Position
+  4. Delete First Element
+  5. Delete Last Element
+  6. Delete from nth Position
+  7. Print the List
+  x. Exit
+
+Enter Choice: 1
+-----
+
+Enter data: 8
+
+----
+8    65    2
+----
+
+
+Linked List
+--------------------------------
+
+
+What would you like to do?
+
+  1. Insert at First Position
+  2. Insert at Last Position
+  3. Insert at nth Position
+  4. Delete First Element
+  5. Delete Last Element
+  6. Delete from nth Position
+  7. Print the List
+  x. Exit
+
+Enter Choice: 1
+-----
+
+Enter data: 8
+
+----
+8    8    65    2
+----
+
+
+Linked List
+--------------------------------
+
+
+What would you like to do?
+
+  1. Insert at First Position
+  2. Insert at Last Position
+  3. Insert at nth Position
+  4. Delete First Element
+  5. Delete Last Element
+  6. Delete from nth Position
+  7. Print the List
+  x. Exit
+
+Enter Choice: 2
+-----
+
+Enter data: 4
+
+----
+8    8    65    2    4
+----
+
+
+Linked List
+--------------------------------
+
+
+What would you like to do?
+
+  1. Insert at First Position
+  2. Insert at Last Position
+  3. Insert at nth Position
+  4. Delete First Element
+  5. Delete Last Element
+  6. Delete from nth Position
+  7. Print the List
+  x. Exit
+
+Enter Choice: 2
+-----
+
+Enter data: 6
+
+----
+8    8    65    2    4    6
+----
+
+
+Linked List
+--------------------------------
+
+
+What would you like to do?
+
+  1. Insert at First Position
+  2. Insert at Last Position
+  3. Insert at nth Position
+  4. Delete First Element
+  5. Delete Last Element
+  6. Delete from nth Position
+  7. Print the List
+  x. Exit
+
+Enter Choice: 1
+-----
+
+Enter data: 3
+
+----
+3    8    8    65    2    4    6
+----
+
+
+Linked List
+--------------------------------
+
+
+What would you like to do?
+
+  1. Insert at First Position
+  2. Insert at Last Position
+  3. Insert at nth Position
+  4. Delete First Element
+  5. Delete Last Element
+  6. Delete from nth Position
+  7. Print the List
+  x. Exit
+
+Enter Choice: 3
+-----
+
+Enter data: 12
+Enter position: 2
+
+----
+3    8    12    8    65    2    4    6
+----
+
+
+Linked List
+--------------------------------
+
+
+What would you like to do?
+
+  1. Insert at First Position
+  2. Insert at Last Position
+  3. Insert at nth Position
+  4. Delete First Element
+  5. Delete Last Element
+  6. Delete from nth Position
+  7. Print the List
+  x. Exit
+
+Enter Choice: 4
+-----
+
+----
+8    12    8    65    2    4    6
+----
+
+
+Linked List
+--------------------------------
+
+
+What would you like to do?
+
+  1. Insert at First Position
+  2. Insert at Last Position
+  3. Insert at nth Position
+  4. Delete First Element
+  5. Delete Last Element
+  6. Delete from nth Position
+  7. Print the List
+  x. Exit
+
+Enter Choice: 5
+-----
+
+----
+8    12    8    65    2    4
+----
+
+
+Linked List
+--------------------------------
+
+
+What would you like to do?
+
+  1. Insert at First Position
+  2. Insert at Last Position
+  3. Insert at nth Position
+  4. Delete First Element
+  5. Delete Last Element
+  6. Delete from nth Position
+  7. Print the List
+  x. Exit
+
+Enter Choice: 5
+-----
+
+----
+8    12    8    65    2
+----
+
+
+Linked List
+--------------------------------
+
+
+What would you like to do?
+
+  1. Insert at First Position
+  2. Insert at Last Position
+  3. Insert at nth Position
+  4. Delete First Element
+  5. Delete Last Element
+  6. Delete from nth Position
+  7. Print the List
+  x. Exit
+
+Enter Choice: 6
+-----
+Enter position: 2
+
+----
+8    12    65    2
+----
+
+
+Linked List
+--------------------------------
+
+
+What would you like to do?
+
+  1. Insert at First Position
+  2. Insert at Last Position
+  3. Insert at nth Position
+  4. Delete First Element
+  5. Delete Last Element
+  6. Delete from nth Position
+  7. Print the List
+  x. Exit
+
+Enter Choice: 7
+-----
+
+----
+8    12    65    2
+----
+
+
+Linked List
+--------------------------------
+
+
+What would you like to do?
+
+  1. Insert at First Position
+  2. Insert at Last Position
+  3. Insert at nth Position
+  4. Delete First Element
+  5. Delete Last Element
+  6. Delete from nth Position
+  7. Print the List
+  x. Exit
+
+Enter Choice: x
+-----</pre></div><div class='prog'><pre>/**
+<h2>  * String Operation: strrev[user defined]
+</h2>  * Vishesh yadav
+  *
+  */
+
+#include&lt;stdio.h&gt;
+
+char* strrev(char* s)
+{
+    int l=-1, i=0;
+    while (s[++l]);
+    for (i=0; i&lt;l/2; ++i) {
+        char t=s[i];
+        s[i]=s[l-i-1];
+        s[l-i-1]=t;
+    }
+    return s;
+}
+
+#define MAX 50
+
+int main(void)
+{
+    char s1[MAX];
+
+    printf("Enter s1: ");
+    gets(s1);
+
+    printf("reverse of s1 = %s", strrev(s1));
+
+    return 0;
+}
+
+</pre><h5>Output</h5><pre>Enter s1: vishesh
+reverse of s1 = hsehsiv
+
+
+
+
+
+
+</pre></div><div class='prog'><pre>/**
+<h2>  * String Operation: strrev[user defined]
+</h2>  * Vishesh yadav
+  *
+  */
+
+#include&lt;stdio.h&gt;
+#include&lt;string.h&gt;
+
+#define MAX 50
+
+int main(void)
+{
+    char s1[MAX];
+
+    printf("Enter s1: ");
+    gets(s1);
+
+    printf("reverse of s1 = %s", strrev(s1));
+
+    return 0;
+}
+
+</pre><h5>Output</h5><pre>Enter s1: vishesh
+reverse of s1 = hsehsiv
+
+
+
+
+
+
+</pre></div><div class='prog'><pre>
+/**
+<h2> * Fibonacci Series
+</h2> * Vishesh Yadav
+ *
+ */
+
+#include&lt;stdio.h&gt;
+
+int main()
+{
+    int past = 0, present = 1, inc, x;
+    printf("%4d", past);
+
+    for (inc=0; inc&lt;20; inc++) {
+        printf("%4d", present);
+        x = present;
+        present += past;
+        past = x;
+    }
+    getchar();
+    return 0;
+}
+</pre><h5>Output</h5><pre>  0   1   1   2   3   5   8  13  21  34  55  89 144 233 377 610
+</pre></div><div class='prog'><pre>
+/**
+<h2> * Queue using Linked List
+</h2> * Vishesh Yadav
+ *
+ */
+
+
+#include&lt;stdio.h&gt;
+#include&lt;stdlib.h&gt;
+
+
+typedef struct _list_node {
+    struct _list_node* next;
+    int data;
+} ListNode;
+
+typedef struct {
+    ListNode *head;
+} Queue;
+
+ListNode* list_get_head(Queue *l)
+{
+    return l-&gt;head;
+}
+
+ListNode* list_create_node(int data, ListNode* next)
+{
+    ListNode *node = (ListNode*)malloc(sizeof(ListNode));
+    if (node) {
+        node-&gt;data = data;
+        node-&gt;next = next;
+    }
+    return node;
+}
+
+Queue* queue_new()
+{
+    Queue* list = (Queue*)malloc(sizeof(Queue));
+    if (list)
+        list-&gt;head = NULL;
+    return list;
+}
+
+void queue_free(Queue *l)
+{
+    ListNode *node = list_get_head(l), *temp;
+    while (node)	{
+        temp = node;
+        node = node-&gt;next;
+        free(temp);
+    }
+}
+
+int queue_is_empty(Queue* l)
+{
+    return l-&gt;head==NULL;
+}
+
+ListNode* list_get_tail(Queue *l)
+{
+    ListNode *node = list_get_head(l);
+    if (!node)
+        return NULL;
+    while (node-&gt;next)
+        node = node-&gt;next;
+    return node;
+}
+
+int queue_insert(Queue *l, int data)
+{
+    ListNode *node;
+    ListNode *last = list_get_tail(l);
+
+    node = list_create_node(data, NULL);
+    if (!node)
+        return 0;
+
+    if (!last)
+        l-&gt;head = node;
+    else
+        last-&gt;next = node;
+
+    return 1;
+}
+
+int queue_remove(Queue* l)
+{
+    ListNode *new_front;
+    int ret;
+    if (queue_is_empty(l))
+        return -1;
+    new_front = list_get_head(l)-&gt;next;
+    ret = l-&gt;head-&gt;data;
+    free(list_get_head(l));
+    l-&gt;head = new_front;
+    return ret;
+}
+
+
+void print_queue(Queue *l)
+{
+    ListNode *node = list_get_head(l);
+    printf("\n----\n");
+    while (node)	{
+        printf("%d    ", node-&gt;data);
+        node = node-&gt;next;
+    }
+    printf("\n----\n\n");
+}
+
+
+int main()
+{
+    Queue *q = queue_new(10);
+    char opt = ' ';
+
+    printf("\n\nQUEUE IMPLEMENTATION USING LINKED LIST\n");
+
+    while ( opt != 'x' ) {
+        printf("  1. Insert\n");
+        printf("  2. Remove\n");
+        printf("  x. Exit\n\n");
+
+        printf("\nWhat to do?\n");
+        fflush(stdin);
+        scanf("%c", &amp;opt);
+
+        if ( opt == '1' ) {
+            int x;
+            printf("\nEnter Data: ");
+            scanf("%d", &amp;x);
+            queue_insert(q, x);
+        } else if ( opt == '2' ) {
+            printf("\nDequeued  -&gt;  %d", queue_remove(q) );
+        } else if ( opt == 'x' ) {
+            break;
+        }
+        printf("\nQueue is now\n");
+        print_queue(q);
+    }
+    queue_free(q);
+    return 0;
+}
+
+</pre><h5>Output</h5><pre>
+
+QUEUE IMPLEMENTATION USING LINKED LIST
+  1. Insert
+  2. Remove
+  x. Exit
+
+
+What to do?
+1
+
+Enter Data: 4
+
+Queue is now
+
+----
+4
+----
+
+  1. Insert
+  2. Remove
+  x. Exit
+
+
+What to do?
+1
+
+Enter Data: 6
+
+Queue is now
+
+----
+4    6
+----
+
+  1. Insert
+  2. Remove
+  x. Exit
+
+
+What to do?
+1
+
+Enter Data: 7
+
+Queue is now
+
+----
+4    6    7
+----
+
+  1. Insert
+  2. Remove
+  x. Exit
+
+
+What to do?
+1
+
+Enter Data: 3
+
+Queue is now
+
+----
+4    6    7    3
+----
+
+  1. Insert
+  2. Remove
+  x. Exit
+
+
+What to do?
+2
+
+Dequeued  -&gt;  4
+Queue is now
+
+----
+6    7    3
+----
+
+  1. Insert
+  2. Remove
+  x. Exit
+
+
+What to do?
+2
+
+Dequeued  -&gt;  6
+Queue is now
+
+----
+7    3
+----
+
+  1. Insert
+  2. Remove
+  x. Exit
+
+
+What to do?
+x</pre></div><div class='prog'><pre>
+/**
+<h2> * Stack using Array
+</h2> * Vishesh Yadav
+ *
+ */
+
+
+#include&lt;stdio.h&gt;
+#include&lt;stdlib.h&gt;
+
+
+typedef struct _stack {
+    int *data;
+    unsigned int size;
+    unsigned int tail;
+} Stack;
+
+Stack* stack_new(unsigned int size)
+{
+    Stack *stck = (Stack*)malloc(sizeof(Stack));
+    if (stck) {
+        stck-&gt;data = (int*)malloc(sizeof(int)*size);
+        if (!stck-&gt;data) {
+            free(stck);
+            return NULL;
+        }
+        stck-&gt;size = size;
+        stck-&gt;tail = 0;
+    }
+    return stck;
+}
+
+int stack_is_empty(Stack *stack)
+{
+    return stack-&gt;tail==0;
+}
+
+int stack_is_full(Stack *stack)
+{
+    return stack-&gt;tail==stack-&gt;size;
+}
+
+int stack_push(Stack *stack, int data)
+{
+    if (stack_is_full(stack))
+        return 0;
+    stack-&gt;data[stack-&gt;tail++] = data;
+    return 1;
+}
+
+int stack_pop(Stack *stack)
+{
+    if (stack_is_empty(stack))
+        return 0;
+    return stack-&gt;data[--stack-&gt;tail];
+}
+
+int stack_peek(Stack *stack)
+{
+    if (stack_is_empty(stack))
+        return -1;
+    return stack-&gt;data[stack-&gt;tail-1];
+}
+
+void stack_free(Stack *stack)
+{
+    free(stack-&gt;data);
+    free(stack);
+}
+
+void print_stack(Stack *stack)
+{
+    unsigned int i;
+    printf("\n------\n");
+    for (i=0; i&lt;stack-&gt;tail; i++)
+        printf("%d  ", stack-&gt;data[i]);
+    printf("\n------\n");
+}
+
+
+int main()
+{
+    Stack *s = stack_new(10);
+    char choice = '\0';
+    int data;
+
+    while (choice!='x') {
+        printf("\nStack\n--------------------------------");
+        printf("\n\n\nWhat would you like to do?\n");
+        printf("\n  1. Push");
+        printf("\n  2. Pop");
+        printf("\n  3. Print the Stack contents");
+        printf("\n  x. Exit");
+        printf("\n\nEnter Choice: ");
+        fflush(stdin);
+        scanf("%c", &amp;choice);
+        printf("-----\n");
+        switch (choice) {
+        case 'x':
+            break;
+        case '1':
+            printf("\nEnter data: ");
+            scanf("%d", &amp;data);
+            stack_push(s, data);
+            print_stack(s);
+            break;
+        case '2':
+            printf("\nPopped: %d", stack_pop(s));
+            print_stack(s);
+            break;
+        case '3':
+            print_stack(s);
+            break;
+        }
+
+    }
+    stack_free(s);
+}
+</pre><h5>Output</h5><pre>
+Stack
+--------------------------------
+
+
+What would you like to do?
+
+  1. Push
+  2. Pop
+  3. Print the Stack contents
+  x. Exit
+
+Enter Choice: 1
+-----
+
+Enter data: 6
+
+------
+6
+------
+
+Stack
+--------------------------------
+
+
+What would you like to do?
+
+  1. Push
+  2. Pop
+  3. Print the Stack contents
+  x. Exit
+
+Enter Choice: 1
+-----
+
+Enter data: 8
+
+------
+6  8
+------
+
+Stack
+--------------------------------
+
+
+What would you like to do?
+
+  1. Push
+  2. Pop
+  3. Print the Stack contents
+  x. Exit
+
+Enter Choice: 1
+-----
+
+Enter data: 9
+
+------
+6  8  9
+------
+
+Stack
+--------------------------------
+
+
+What would you like to do?
+
+  1. Push
+  2. Pop
+  3. Print the Stack contents
+  x. Exit
+
+Enter Choice: 1
+-----
+
+Enter data: 12
+
+------
+6  8  9  12
+------
+
+Stack
+--------------------------------
+
+
+What would you like to do?
+
+  1. Push
+  2. Pop
+  3. Print the Stack contents
+  x. Exit
+
+Enter Choice: 2
+-----
+
+Popped: 12
+------
+6  8  9
+------
+
+Stack
+--------------------------------
+
+
+What would you like to do?
+
+  1. Push
+  2. Pop
+  3. Print the Stack contents
+  x. Exit
+
+Enter Choice: 2
+-----
+
+Popped: 9
+------
+6  8
+------
+
+Stack
+--------------------------------
+
+
+What would you like to do?
+
+  1. Push
+  2. Pop
+  3. Print the Stack contents
+  x. Exit
+
+Enter Choice: x
+-----</pre></div><div class='prog'><pre>
+/**
+<h2> * Linked List using Dynamic Memory Allocation
+</h2> * Vishesh Yadav
+ *
+ */
+
+
+#include&lt;stdio.h&gt;
+#include&lt;stdlib.h&gt;
+
+
+typedef struct _list_node {
+    struct _list_node* next;
+    int data;
+} ListNode;
+
+typedef struct {
+    ListNode *head;
+} List;
+
+ListNode* list_get_head(List *l)
+{
+    return l-&gt;head;
+}
+
+ListNode* list_create_node(int data, ListNode* next)
+{
+    ListNode *node = (ListNode*)malloc(sizeof(ListNode));
+    if (node) {
+        node-&gt;data = data;
+        node-&gt;next = next;
+    }
+    return node;
+}
+
+List* list_new()
+{
+    List* list = (List*)malloc(sizeof(List));
+    if (list)
+        list-&gt;head = NULL;
+    return list;
+}
+
+void list_free(List *l)
+{
+    ListNode *node = list_get_head(l), *temp;
+    while (node)	{
+        temp = node;
+        node = node-&gt;next;
+        free(temp);
+    }
+}
+
+int list_is_empty(List* l)
+{
+    return l-&gt;head==NULL;
+}
+
+int list_push_front(List* l, int data)
+{
+    ListNode *node = list_create_node(data, l-&gt;head);
+    if (!node)
+        return 0;
+    l-&gt;head = node;
+    return 1;
+}
+
+int list_insert_at(List *l, int pos, int data)
+{
+    int i;
+    ListNode *at = list_get_head(l), *pat, *node;
+
+    if (pos==0)
+        return list_push_front(l, data);
+
+    for (i=0; i&lt;pos; i++) {
+        pat = at;
+        at = at-&gt;next;
+        if (!at &amp;&amp; i!=pos-1)
+            return 0;
+    }
+
+    node = list_create_node(data, at);
+    if (node)
+        pat-&gt;next = node;
+    return node!=NULL;
+}
+
+ListNode* list_get_tail(List *l)
+{
+    ListNode *node = list_get_head(l);
+    if (!node)
+        return NULL;
+    while (node-&gt;next)
+        node = node-&gt;next;
+    return node;
+}
+
+int list_push_back(List *l, int data)
+{
+    ListNode *node;
+    ListNode *last = list_get_tail(l);
+
+    if (!last)
+        return list_push_front(l, data);
+
+    node = list_create_node(data, NULL);
+    if (!node)
+        return 0;
+
+    last-&gt;next = node;
+    return 1;
+}
+
+int list_pop_back(List* l)
+{
+    ListNode *last = list_get_head(l), *last2;
+    if (list_is_empty(l))
+        return 0;
+    while (last-&gt;next) {
+        last2 = last;
+        last = last-&gt;next;
+    }
+
+    free(last);
+    last2-&gt;next = NULL;
+    return 1;
+}
+
+int list_pop_front(List* l)
+{
+    ListNode *new_front;
+    if (list_is_empty(l))
+        return 0;
+    new_front = list_get_head(l)-&gt;next;
+    free(list_get_head(l));
+    l-&gt;head = new_front;
+    return 1;
+}
+
+int list_delete_at(List *l, int pos)
+{
+    int i;
+    ListNode *at = list_get_head(l), *pat;
+    if (list_is_empty(l))
+        return 0;
+
+    if (pos==0)
+        return list_pop_front(l);
+
+    for (i=0; i&lt;pos; i++) {
+        pat = at;
+        at = at-&gt;next;
+        if (!at &amp;&amp; i!=pos-1)
+            return 0;
+    }
+    pat-&gt;next = at-&gt;next;
+    free(at);
+    return 1;
+}
+
+void print_list(List *l)
+{
+    ListNode *node = list_get_head(l);
+    printf("\n----\n");
+    while (node)	{
+        printf("%d    ", node-&gt;data);
+        node = node-&gt;next;
+    }
+    printf("\n----\n\n");
+}
+
+int main()
+{
+    List *l = list_new();
+    char choice = '\0';
+    int pos, data;
+
+    while (choice!='x') {
+        printf("\nLinked List\n--------------------------------");
+        printf("\n\n\nWhat would you like to do?\n");
+        printf("\n  1. Insert at First Position");
+        printf("\n  2. Insert at Last Position");
+        printf("\n  3. Insert at nth Position");
+        printf("\n  4. Delete First Element");
+        printf("\n  5. Delete Last Element");
+        printf("\n  6. Delete from nth Position");
+        printf("\n  7. Print the List");
+        printf("\n  x. Exit");
+        printf("\n\nEnter Choice: ");
+        fflush(stdin);
+        scanf("%c", &amp;choice);
+        printf("-----\n");
+        switch (choice) {
+        case 'x':
+            break;
+        case '1':
+            printf("\nEnter data: ");
+            scanf("%d", &amp;data);
+            list_push_front(l, data);
+            print_list(l);
+            break;
+        case '2':
+            printf("\nEnter data: ");
+            scanf("%d", &amp;data);
+            list_push_back(l, data);
+            print_list(l);
+            break;
+        case '3':
+            printf("\nEnter data: ");
+            scanf("%d", &amp;data);
+            printf("Enter position: ");
+            scanf("%d", &amp;pos);
+            list_insert_at(l, pos, data);
+            print_list(l);
+            break;
+        case '4':
+            list_pop_front(l);
+            print_list(l);
+            break;
+        case '5':
+            list_pop_back(l);
+            print_list(l);
+            break;
+        case '6':
+            printf("Enter position: ");
+            scanf("%d", &amp;pos);
+            list_delete_at(l, pos);
+            print_list(l);
+            break;
+        case '7':
+            print_list(l);
+            break;
+        }
+
+    }
+    list_free(l);
+}
+</pre><h5>Output</h5><pre>
+Linked List
+--------------------------------
+
+
+What would you like to do?
+
+  1. Insert at First Position
+  2. Insert at Last Position
+  3. Insert at nth Position
+  4. Delete First Element
+  5. Delete Last Element
+  6. Delete from nth Position
+  7. Print the List
+  x. Exit
+
+Enter Choice: 1
+-----
+
+Enter data: 2
+
+----
+2
+----
+
+
+Linked List
+--------------------------------
+
+
+What would you like to do?
+
+  1. Insert at First Position
+  2. Insert at Last Position
+  3. Insert at nth Position
+  4. Delete First Element
+  5. Delete Last Element
+  6. Delete from nth Position
+  7. Print the List
+  x. Exit
+
+Enter Choice: 1
+-----
+
+Enter data: 2
+
+----
+2    2
+----
+
+
+Linked List
+--------------------------------
+
+
+What would you like to do?
+
+  1. Insert at First Position
+  2. Insert at Last Position
+  3. Insert at nth Position
+  4. Delete First Element
+  5. Delete Last Element
+  6. Delete from nth Position
+  7. Print the List
+  x. Exit
+
+Enter Choice: 2
+-----
+
+Enter data: 3
+
+----
+2    2    3
+----
+
+
+Linked List
+--------------------------------
+
+
+What would you like to do?
+
+  1. Insert at First Position
+  2. Insert at Last Position
+  3. Insert at nth Position
+  4. Delete First Element
+  5. Delete Last Element
+  6. Delete from nth Position
+  7. Print the List
+  x. Exit
+
+Enter Choice: 2
+-----
+
+Enter data: 5
+
+----
+2    2    3    5
+----
+
+
+Linked List
+--------------------------------
+
+
+What would you like to do?
+
+  1. Insert at First Position
+  2. Insert at Last Position
+  3. Insert at nth Position
+  4. Delete First Element
+  5. Delete Last Element
+  6. Delete from nth Position
+  7. Print the List
+  x. Exit
+
+Enter Choice: 2
+-----
+
+Enter data: 9
+
+----
+2    2    3    5    9
+----
+
+
+Linked List
+--------------------------------
+
+
+What would you like to do?
+
+  1. Insert at First Position
+  2. Insert at Last Position
+  3. Insert at nth Position
+  4. Delete First Element
+  5. Delete Last Element
+  6. Delete from nth Position
+  7. Print the List
+  x. Exit
+
+Enter Choice: 3
+-----
+
+Enter data: 11
+Enter position: 2
+
+----
+2    2    11    3    5    9
+----
+
+
+Linked List
+--------------------------------
+
+
+What would you like to do?
+
+  1. Insert at First Position
+  2. Insert at Last Position
+  3. Insert at nth Position
+  4. Delete First Element
+  5. Delete Last Element
+  6. Delete from nth Position
+  7. Print the List
+  x. Exit
+
+Enter Choice: 4
+-----
+
+----
+2    11    3    5    9
+----
+
+
+Linked List
+--------------------------------
+
+
+What would you like to do?
+
+  1. Insert at First Position
+  2. Insert at Last Position
+  3. Insert at nth Position
+  4. Delete First Element
+  5. Delete Last Element
+  6. Delete from nth Position
+  7. Print the List
+  x. Exit
+
+Enter Choice: 5
+-----
+
+----
+2    11    3    5
+----
+
+
+Linked List
+--------------------------------
+
+
+What would you like to do?
+
+  1. Insert at First Position
+  2. Insert at Last Position
+  3. Insert at nth Position
+  4. Delete First Element
+  5. Delete Last Element
+  6. Delete from nth Position
+  7. Print the List
+  x. Exit
+
+Enter Choice: 6
+-----
+Enter position: 2
+
+----
+2    11    5
+----
+
+
+Linked List
+--------------------------------
+
+
+What would you like to do?
+
+  1. Insert at First Position
+  2. Insert at Last Position
+  3. Insert at nth Position
+  4. Delete First Element
+  5. Delete Last Element
+  6. Delete from nth Position
+  7. Print the List
+  x. Exit
+
+Enter Choice: 7
+-----
+
+----
+2    11    5
+----
+
+
+Linked List
+--------------------------------
+
+
+What would you like to do?
+
+  1. Insert at First Position
+  2. Insert at Last Position
+  3. Insert at nth Position
+  4. Delete First Element
+  5. Delete Last Element
+  6. Delete from nth Position
+  7. Print the List
+  x. Exit
+
+Enter Choice: x
+-----</pre></div><div class='prog'><pre>
+/**
+<h2> * Factorial
+</h2> * Vishesh Yadav
+ *
+ */
+
+#include&lt;stdio.h&gt;
+
+int main()
+{
+    int a, fact = 1;
+    printf("\nEnter number: ");
+    scanf("%d", &amp;a);
+
+    int i;
+    for (i=1; i&lt;=a; i++) {
+        fact *= i;
+    }
+
+    printf("Factorial is: %d", fact);
+    getchar();
+    getchar();
+    return 0;
+}
+</pre><h5>Output</h5><pre>
+Enter number: 6
+Factorial is: 720</pre></div>
+</body>
+
+</html>

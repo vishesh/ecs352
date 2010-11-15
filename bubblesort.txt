@@ -1,0 +1,22 @@
+
+
+Array Input:
+Enter array[0]: 323
+Enter array[1]: 2
+Enter array[2]: 24
+Enter array[3]: 12
+Enter array[4]: 75
+Enter array[5]: 43
+Enter array[6]: 21
+Enter array[7]: 78
+Enter array[8]: 32
+Enter array[9]: 98
+
+You Entered:
+--------
+323 - 2 - 24 - 12 - 75 - 43 - 21 - 78 - 32 - 98 -
+--------
+After Sorting:
+--------
+2 - 12 - 21 - 24 - 32 - 43 - 75 - 78 - 98 - 323 -
+--------

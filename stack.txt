@@ -1,0 +1,132 @@
+
+Stack
+--------------------------------
+
+
+What would you like to do?
+
+  1. Push
+  2. Pop
+  3. Print the Stack contents
+  x. Exit
+
+Enter Choice: 1
+-----
+
+Enter data: 6
+
+------
+6
+------
+
+Stack
+--------------------------------
+
+
+What would you like to do?
+
+  1. Push
+  2. Pop
+  3. Print the Stack contents
+  x. Exit
+
+Enter Choice: 1
+-----
+
+Enter data: 8
+
+------
+6  8
+------
+
+Stack
+--------------------------------
+
+
+What would you like to do?
+
+  1. Push
+  2. Pop
+  3. Print the Stack contents
+  x. Exit
+
+Enter Choice: 1
+-----
+
+Enter data: 9
+
+------
+6  8  9
+------
+
+Stack
+--------------------------------
+
+
+What would you like to do?
+
+  1. Push
+  2. Pop
+  3. Print the Stack contents
+  x. Exit
+
+Enter Choice: 1
+-----
+
+Enter data: 12
+
+------
+6  8  9  12
+------
+
+Stack
+--------------------------------
+
+
+What would you like to do?
+
+  1. Push
+  2. Pop
+  3. Print the Stack contents
+  x. Exit
+
+Enter Choice: 2
+-----
+
+Popped: 12
+------
+6  8  9
+------
+
+Stack
+--------------------------------
+
+
+What would you like to do?
+
+  1. Push
+  2. Pop
+  3. Print the Stack contents
+  x. Exit
+
+Enter Choice: 2
+-----
+
+Popped: 9
+------
+6  8
+------
+
+Stack
+--------------------------------
+
+
+What would you like to do?
+
+  1. Push
+  2. Pop
+  3. Print the Stack contents
+  x. Exit
+
+Enter Choice: x
+-----

@@ -1,0 +1,86 @@
+With How many numbers do you wanto start with?3
+Enter the array:2 4 6
+
+What do you want to do?
+ 1. Insert an element.
+ 2. Delete an element
+ 3. Reverse
+ 4. Display
+ 5. Exit
+4
+
+2 4 6
+
+
+What do you want to do?
+ 1. Insert an element.
+ 2. Delete an element
+ 3. Reverse
+ 4. Display
+ 5. Exit
+1
+Enter the Position (zero-based) and the element to be inserted:2
+6
+Done!
+
+What do you want to do?
+ 1. Insert an element.
+ 2. Delete an element
+ 3. Reverse
+ 4. Display
+ 5. Exit
+4
+
+2 4 6 6
+
+
+What do you want to do?
+ 1. Insert an element.
+ 2. Delete an element
+ 3. Reverse
+ 4. Display
+ 5. Exit
+1
+Enter the Position (zero-based) and the element to be inserted:3
+7
+Done!
+
+What do you want to do?
+ 1. Insert an element.
+ 2. Delete an element
+ 3. Reverse
+ 4. Display
+ 5. Exit
+4
+
+2 4 6 7 6
+
+
+What do you want to do?
+ 1. Insert an element.
+ 2. Delete an element
+ 3. Reverse
+ 4. Display
+ 5. Exit
+2
+Enter the position at which you want to delete the element:2
+Done!
+
+What do you want to do?
+ 1. Insert an element.
+ 2. Delete an element
+ 3. Reverse
+ 4. Display
+ 5. Exit
+4
+
+2 4 7 6
+
+
+What do you want to do?
+ 1. Insert an element.
+ 2. Delete an element
+ 3. Reverse
+ 4. Display
+ 5. Exit
+5

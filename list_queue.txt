@@ -1,0 +1,104 @@
+
+
+QUEUE IMPLEMENTATION USING LINKED LIST
+  1. Insert
+  2. Remove
+  x. Exit
+
+
+What to do?
+1
+
+Enter Data: 4
+
+Queue is now
+
+----
+4
+----
+
+  1. Insert
+  2. Remove
+  x. Exit
+
+
+What to do?
+1
+
+Enter Data: 6
+
+Queue is now
+
+----
+4    6
+----
+
+  1. Insert
+  2. Remove
+  x. Exit
+
+
+What to do?
+1
+
+Enter Data: 7
+
+Queue is now
+
+----
+4    6    7
+----
+
+  1. Insert
+  2. Remove
+  x. Exit
+
+
+What to do?
+1
+
+Enter Data: 3
+
+Queue is now
+
+----
+4    6    7    3
+----
+
+  1. Insert
+  2. Remove
+  x. Exit
+
+
+What to do?
+2
+
+Dequeued  ->  4
+Queue is now
+
+----
+6    7    3
+----
+
+  1. Insert
+  2. Remove
+  x. Exit
+
+
+What to do?
+2
+
+Dequeued  ->  6
+Queue is now
+
+----
+7    3
+----
+
+  1. Insert
+  2. Remove
+  x. Exit
+
+
+What to do?
+x

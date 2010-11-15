@@ -1,0 +1,262 @@
+
+Linked List using Array
+--------------------------------
+
+
+What would you like to do?
+
+  1. Insert at First Position
+  2. Insert at Last Position
+  3. Insert at nth Position
+  4. Delete First Element
+  5. Delete Last Element
+  6. Delete from nth Position
+  7. Print the List
+  x. Exit
+
+Enter Choice: 1
+-----
+
+Enter data: 2
+
+----
+2
+----
+
+
+Linked List using Array
+--------------------------------
+
+
+What would you like to do?
+
+  1. Insert at First Position
+  2. Insert at Last Position
+  3. Insert at nth Position
+  4. Delete First Element
+  5. Delete Last Element
+  6. Delete from nth Position
+  7. Print the List
+  x. Exit
+
+Enter Choice: 1
+-----
+
+Enter data: 2
+
+----
+2    2
+----
+
+
+Linked List using Array
+--------------------------------
+
+
+What would you like to do?
+
+  1. Insert at First Position
+  2. Insert at Last Position
+  3. Insert at nth Position
+  4. Delete First Element
+  5. Delete Last Element
+  6. Delete from nth Position
+  7. Print the List
+  x. Exit
+
+Enter Choice: 2
+-----
+
+Enter data: 3
+
+----
+2    2    3
+----
+
+
+Linked List using Array
+--------------------------------
+
+
+What would you like to do?
+
+  1. Insert at First Position
+  2. Insert at Last Position
+  3. Insert at nth Position
+  4. Delete First Element
+  5. Delete Last Element
+  6. Delete from nth Position
+  7. Print the List
+  x. Exit
+
+Enter Choice: 2
+-----
+
+Enter data: 5
+
+----
+2    2    3    5
+----
+
+
+Linked List using Array
+--------------------------------
+
+
+What would you like to do?
+
+  1. Insert at First Position
+  2. Insert at Last Position
+  3. Insert at nth Position
+  4. Delete First Element
+  5. Delete Last Element
+  6. Delete from nth Position
+  7. Print the List
+  x. Exit
+
+Enter Choice: 2
+-----
+
+Enter data: 9
+
+----
+2    2    3    5    9
+----
+
+
+Linked List using Array
+--------------------------------
+
+
+What would you like to do?
+
+  1. Insert at First Position
+  2. Insert at Last Position
+  3. Insert at nth Position
+  4. Delete First Element
+  5. Delete Last Element
+  6. Delete from nth Position
+  7. Print the List
+  x. Exit
+
+Enter Choice: 3
+-----
+
+Enter data: 11
+Enter position: 2
+
+----
+2    2    11    3    5    9
+----
+
+
+Linked List using Array
+--------------------------------
+
+
+What would you like to do?
+
+  1. Insert at First Position
+  2. Insert at Last Position
+  3. Insert at nth Position
+  4. Delete First Element
+  5. Delete Last Element
+  6. Delete from nth Position
+  7. Print the List
+  x. Exit
+
+Enter Choice: 4
+-----
+
+----
+2    11    3    5    9
+----
+
+
+Linked List using Array
+--------------------------------
+
+
+What would you like to do?
+
+  1. Insert at First Position
+  2. Insert at Last Position
+  3. Insert at nth Position
+  4. Delete First Element
+  5. Delete Last Element
+  6. Delete from nth Position
+  7. Print the List
+  x. Exit
+
+Enter Choice: 5
+-----
+
+----
+2    11    3    5
+----
+
+
+Linked List using Array
+--------------------------------
+
+
+What would you like to do?
+
+  1. Insert at First Position
+  2. Insert at Last Position
+  3. Insert at nth Position
+  4. Delete First Element
+  5. Delete Last Element
+  6. Delete from nth Position
+  7. Print the List
+  x. Exit
+
+Enter Choice: 6
+-----
+Enter position: 2
+
+----
+2    11    5
+----
+
+
+Linked List using Array
+--------------------------------
+
+
+What would you like to do?
+
+  1. Insert at First Position
+  2. Insert at Last Position
+  3. Insert at nth Position
+  4. Delete First Element
+  5. Delete Last Element
+  6. Delete from nth Position
+  7. Print the List
+  x. Exit
+
+Enter Choice: 7
+-----
+
+----
+2    11    5
+----
+
+
+Linked List using Array
+--------------------------------
+
+
+What would you like to do?
+
+  1. Insert at First Position
+  2. Insert at Last Position
+  3. Insert at nth Position
+  4. Delete First Element
+  5. Delete Last Element
+  6. Delete from nth Position
+  7. Print the List
+  x. Exit
+
+Enter Choice: x
+-----

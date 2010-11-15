@@ -1,0 +1,6 @@
+Enter numbers(a, b, c): 2 8 9
+Average: 6.333333
+Sum: 19
+
+
+

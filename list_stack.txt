@@ -1,0 +1,117 @@
+
+Stack using List
+--------------------------------
+
+
+What would you like to do?
+
+  1. Push
+  2. Pop
+  3. Print the Stack contents
+  x. Exit
+
+Enter Choice: 1
+-----
+
+Enter data: 4
+
+----
+4
+----
+
+
+Stack using List
+--------------------------------
+
+
+What would you like to do?
+
+  1. Push
+  2. Pop
+  3. Print the Stack contents
+  x. Exit
+
+Enter Choice: 1
+-----
+
+Enter data: 5
+
+----
+5    4
+----
+
+
+Stack using List
+--------------------------------
+
+
+What would you like to do?
+
+  1. Push
+  2. Pop
+  3. Print the Stack contents
+  x. Exit
+
+Enter Choice: 1
+-----
+
+Enter data: 9
+
+----
+9    5    4
+----
+
+
+Stack using List
+--------------------------------
+
+
+What would you like to do?
+
+  1. Push
+  2. Pop
+  3. Print the Stack contents
+  x. Exit
+
+Enter Choice: 2
+-----
+
+Popped: 9
+----
+5    4
+----
+
+
+Stack using List
+--------------------------------
+
+
+What would you like to do?
+
+  1. Push
+  2. Pop
+  3. Print the Stack contents
+  x. Exit
+
+Enter Choice: 2
+-----
+
+Popped: 5
+----
+4
+----
+
+
+Stack using List
+--------------------------------
+
+
+What would you like to do?
+
+  1. Push
+  2. Pop
+  3. Print the Stack contents
+  x. Exit
+
+Enter Choice: x
+-----

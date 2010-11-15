@@ -1,0 +1,8 @@
+Enter s1: vishesh
+reverse of s1 = hsehsiv
+
+
+
+
+
+
