@@ -6,10 +6,10 @@ These are my programs for DS Lab 3rd sem. Few programs are taken from sources
 that I might not have mentioned as almost all the programs are created a day
 before the date of submission. :D
 
-There is also a quick and dirty python script 'generate.py' which will create
-a decent HTML page which can be considered as file. It will read all files
+There is also a quick and dirty python script 'generate.py' which will create a
+decent HTML page which can be considered as lab file. It will read all files
 with C extension and files with 'txt' extension as their output and generate
-HTML based on that. I intent to make it better for future pursposes. Main aim
+HTML based on that. I intend to make it better for future pursposes. Main aim
 is to automatically compile and generate output based on input from various
 streams.
 
